@@ -11,9 +11,9 @@ from cases.registration_cases import RegistrationTest
 if __name__ == '__main__':
     suite = unittest.TestSuite(
         (
-        unittest.makeSuite(LoginTest),
-        unittest.makeSuite(RegistrationTest),
-        unittest.makeSuite(EventsTest),
+        #unittest.makeSuite(LoginTest),
+        #unittest.makeSuite(RegistrationTest),
+        #unittest.makeSuite(EventsTest),
         unittest.makeSuite(EventTest),
     )
     )

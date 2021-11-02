@@ -29,6 +29,9 @@ class Page(object):
     def wait_for_url(self, url):
         return WebDriverWait(self.driver, 30, 0.1).until(EC.url_to_be(url))
 
+    def wait_for_page(self, container_css):
+        return WebDriverWait(self.driver, 30, 0.1).until(EC.visibility_of_element_located((By.CSS_SELECTOR, container_css)))
+
     def open(self, url=None):
         if (url == None):
             url = self.BASE_URL
