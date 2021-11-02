@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+
 class Page(object):
     BASE_URL = 'https://qdaqda.ru/'
     PATH = ''
@@ -14,6 +15,7 @@ class Page(object):
 
     def open(self):
         self.open(self.BASE_URL)
+
 
     def wait_until_and_get_elem_by_xpath(self, elem) -> WebElement:
         return WebDriverWait(self.driver, 15, 0.1).until(EC.visibility_of_element_located((By.XPATH, elem)))
@@ -33,3 +35,11 @@ class Page(object):
         url = urllib.parse.urljoin(url, self.PATH)
         self.driver.get(url)
         self.driver.maximize_window()
+
+    def refresh(self):
+        self.driver.refresh()
+
+
+
+
+

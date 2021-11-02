@@ -1,13 +1,9 @@
-import os
 import random
 import string
-import unittest
-from selenium.webdriver import DesiredCapabilities, Remote
 from cases.base_cases import Test
 from pages.login_page import LoginPage
+from pages.main.navbar_page import NavbarPage
 from pages.registration_page import RegistrationPage
-from steps.login_steps import LoginSteps
-from steps.main.navbar_steps import NavbarSteps
 
 good_login = 'sunny'
 short_login = 'bad'
@@ -40,68 +36,107 @@ class LoginTest(Test):
     def setUp(self):
         super().setUp()
         self.page = LoginPage(self.driver)
-        self.steps = LoginSteps(self.driver)
 
     def test_login_ok(self):
-        self.steps.login(self.LOGIN, self.PASSWORD)
+        # Авторизация с корректным логином (при корректном пароле).
 
-        navbar = NavbarSteps(self.driver)
+        self.page.open()
+        self.page.fill_form(self.LOGIN, self.PASSWORD)
+        self.page.click_login_button()
+
+        navbar = NavbarPage(self.driver)
         login_text = navbar.get_login()
         self.assertEqual(self.LOGIN, login_text)
 
     def test_login_wrong_login(self):
+        # Ошибка при авторизации: с неверным логином
+
         letters = string.ascii_lowercase
         rand_string = ''.join(random.choice(letters) for i in range(10))
 
-        self.steps.login(rand_string, self.PASSWORD)
-        error_text = self.page.get_password_error()
+        self.page.open()
+        self.page.fill_form(rand_string, self.PASSWORD)
+        self.page.click_login_button()
 
-        self.assertEqual(INCORRECT_LOGIN_OR_PASSWORD, error_text)
-
-    def test_login_wrong_password(self):
-        letters = string.ascii_lowercase
-        rand_string = ''.join(random.choice(letters) for i in range(10))
-
-        self.steps.login(self.LOGIN, rand_string)
         error_text = self.page.get_password_error()
 
         self.assertEqual(INCORRECT_LOGIN_OR_PASSWORD, error_text)
 
     def test_login_short_login(self):
-        self.steps.login(short_login, self.PASSWORD)
+        # Ошибка при авторизации: с коротким логином (<6 символов).
+
+        self.page.open()
+        self.page.fill_form(short_login, self.PASSWORD)
+        self.page.click_login_button()
+
         error_text = self.page.get_login_error()
 
         self.assertEqual(LOGIN_ERROR_TEXT, error_text)
 
     def test_login_login_with_punctuation_marks(self):
-        self.steps.login(comma_login, good_password)
+        # Ошибка при авторизации: с логином со знаками препинания (кроме точки)
+
+        self.page.open()
+        self.page.fill_form(comma_login, good_password)
+        self.page.click_login_button()
+
         error_text = self.page.get_login_error()
 
         self.assertEqual(LOGIN_ERROR_TEXT, error_text)
 
     def test_login_empty_login(self):
-        self.steps.login(empty_string, good_password)
+        # Ошибка при авторизации: с пустым логином.
+
+        self.page.open()
+        self.page.fill_form(empty_string, good_password)
+        self.page.click_login_button()
+
         error_text = self.page.get_login_error()
 
         self.assertEqual(LOGIN_ERROR_TEXT, error_text)
 
+    def test_login_wrong_password(self):
+        # Ошибка при авторизации: с неверным паролем
+
+        letters = string.ascii_lowercase
+        rand_string = ''.join(random.choice(letters) for i in range(10))
+
+        self.page.open()
+        self.page.fill_form(self.LOGIN, rand_string)
+        self.page.click_login_button()
+
+        error_text = self.page.get_password_error()
+
+        self.assertEqual(INCORRECT_LOGIN_OR_PASSWORD, error_text)
+
     def test_login_empty_password(self):
-        self.steps.login(good_login, empty_string)
+        # Ошибка при авторизации: c пустым паролем.
+
+        self.page.open()
+        self.page.fill_form(good_login, empty_string)
+        self.page.click_login_button()
+
         error_text = self.page.get_password_error()
 
         self.assertEqual(PASSWORD_ERROR_TEXT, error_text)
 
     def test_login_short_password(self):
-        self.steps.login(good_login, short_password)
+        # Ошибка при авторизации: с коротким паролем (<7 символов).
+
+        self.page.open()
+        self.page.fill_form(good_login, short_password)
+        self.page.click_login_button()
+
         error_text = self.page.get_password_error()
 
         self.assertEqual(PASSWORD_ERROR_TEXT, error_text)
 
     def test_login_redirect_to_registration(self):
-        self.steps.redirect_to_registration()
+        # Переадресация на страницу регистрации.
+
+        self.page.open()
+        self.page.click_redirect()
 
         registration_page = RegistrationPage(self.driver)
         text = registration_page.get_form_title()
         self.assertEqual(REGISTRATION_PAGE_TITLE, text)
-
-

@@ -1,14 +1,6 @@
-import os
-import string
-import unittest
-import random
-
-from selenium.webdriver import DesiredCapabilities, Remote
 from cases.base_cases import Test
 from pages.login_page import LoginPage
 from pages.registration_page import RegistrationPage
-from steps.main.navbar_steps import NavbarSteps
-from steps.registration_steps import RegistrationSteps
 
 good_login = 'sunny'
 short_login = 'bad'
@@ -39,70 +31,122 @@ class RegistrationTest(Test):
     def setUp(self):
         super().setUp()
         self.page = RegistrationPage(self.driver)
-        self.steps = RegistrationSteps(self.driver)
 
     def test_registration_short_login(self):
-        self.steps.register(short_login, good_password, good_name)
+        # Ошибка при регистрации: короткого логина (<6 символов).
+
+        self.page.open()
+        self.page.fill_form(short_login, good_password, good_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_login_error()
 
         self.assertEqual(LOGIN_ERROR_TEXT, error_text)
 
     def test_registration_login_with_punctuation_marks(self):
-        self.steps.register(comma_login, good_password, good_name)
+        # Ошибка при регистрации: логина со знаками препинания (кроме точки)
+
+        self.page.open()
+        self.page.fill_form(comma_login, good_password, good_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_login_error()
 
         self.assertEqual(LOGIN_ERROR_TEXT, error_text)
 
     def test_registration_empty_login(self):
-        self.steps.register(empty_string, good_password, good_name)
+        # Ошибка при регистрации: пустого логина
+
+        self.page.open()
+        self.page.fill_form(empty_string, good_password, good_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_login_error()
 
         self.assertEqual(LOGIN_ERROR_TEXT, error_text)
 
     def test_registration_existing_login(self):
-        self.steps.register(self.LOGIN, self.PASSWORD, good_name)
+        # Ошибка при регистрации: уже существующего логина
+
+        self.page.open()
+        self.page.fill_form(self.LOGIN, self.PASSWORD, good_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_existing_login_error()
 
         self.assertEqual(LOGIN_EXISTING_ERROR_TEXT, error_text)
 
     def test_registration_short_password(self):
-        self.steps.register(good_login, short_password, good_name)
+        # Ошибка при регистрации: короткого пароля (<7 символов).
+
+        self.page.open()
+        self.page.fill_form(good_login, short_password, good_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_password_error()
 
         self.assertEqual(PASSWORD_ERROR_TEXT, error_text)
 
     def test_registration_empty_password(self):
-        self.steps.register(good_login, empty_string, good_name)
+        # Ошибка при регистрации: пустого пароля.
+
+        self.page.open()
+        self.page.fill_form(good_login, empty_string, good_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_password_error()
 
         self.assertEqual(PASSWORD_ERROR_TEXT, error_text)
 
     def test_registration_number_in_name(self):
-        self.steps.register(good_login, good_password, number_name)
+        # Ошибка при регистрации: имени с цифрами.
+
+        self.page.open()
+        self.page.fill_form(good_login, good_password, number_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_name_error()
 
         self.assertEqual(NAME_ERROR_TEXT, error_text)
 
     def test_registration_empty_name(self):
-        self.steps.register(good_login, good_password, empty_string)
+        # Ошибка при регистрации: пустого имени.
+
+        self.page.open()
+        self.page.fill_form(good_login, good_password, empty_string)
+        self.page.click_registration_button()
+
         error_text = self.page.get_name_error()
 
         self.assertEqual(NAME_ERROR_TEXT, error_text)
 
     def test_registration_name_with_punctuation_marks(self):
-        self.steps.register(good_login, good_password, comma_name)
+        # Ошибка при регистрации: имени со знаками препинания.
+
+        self.page.open()
+        self.page.fill_form(good_login, good_password, comma_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_name_error()
 
         self.assertEqual(NAME_ERROR_TEXT, error_text)
 
     def test_registration_special_name(self):
-        self.steps.register(good_login, good_password, special_name)
+        # Ошибка при регистрации: имени со специальными символами.
+
+        self.page.open()
+        self.page.fill_form(good_login, good_password, special_name)
+        self.page.click_registration_button()
+
         error_text = self.page.get_name_error()
 
         self.assertEqual(NAME_ERROR_TEXT, error_text)
 
     def test_registration_redirect_to_login(self):
-        self.steps.redirect_to_login()
+        # Переадресация на страницу авторизации.
+
+        self.page.open()
+        self.page.click_redirect()
 
         login_page = LoginPage(self.driver)
         text = login_page.get_form_title()
@@ -111,6 +155,7 @@ class RegistrationTest(Test):
 
 '''
     def test_registration_good(self):
+        # Регистрация с корректным логином (при других корректных полях).
         letters = string.ascii_lowercase
         rand_string = ''.join(random.choice(letters) for i in range(10))
 
