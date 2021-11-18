@@ -1,6 +1,6 @@
 import time
 import quopri
-from urllib.parse import unquote
+from urllib.parse import unquote, unquote_plus
 
 from cases.base_cases import Test
 from pages.event_page import EventPage
@@ -50,7 +50,7 @@ class EventTest(Test):
         search_page.wait_for_page(search_page.CONTAINER)
 
         redirect_url = self.driver.current_url
-        redirect_url = unquote(redirect_url)
+        redirect_url = unquote_plus(redirect_url)
 
         self.assertIn(tag, redirect_url)
 

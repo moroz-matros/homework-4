@@ -45,8 +45,8 @@ class LoginTest(Test):
         self.page.click_login_button()
 
         navbar = NavbarPage(self.driver)
-        login_text = navbar.get_login()
-        self.assertEqual(self.LOGIN, login_text)
+        name_text = navbar.get_name()
+        self.assertEqual(self.NAME, name_text)
 
     def test_login_wrong_login(self):
         # Ошибка при авторизации: с неверным логином

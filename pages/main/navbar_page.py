@@ -8,9 +8,9 @@ class NavbarPage(Page):
     BASE_URL = 'https://qdaqda.ru'
     PATH = ''
 
-    LOGIN_TEXT = ".navbar-profile-name"
+    NAME_TEXT = ".navbar-profile-name"
 
-    def get_login(self):
-        login_text = self.wait_until_and_get_elem_by_css(self.LOGIN_TEXT)
-        return login_text.text
+    def get_name(self):
+        name_text = self.wait_until_and_get_elem_by_css(self.NAME_TEXT)
+        return name_text.text
 
