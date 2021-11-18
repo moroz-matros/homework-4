@@ -44,8 +44,19 @@ class EventsTest(Test):
 
         self.assertEqual(title, title_active)
 
+    ''' <BUG>
+    def test_events_tab_save_refresh(self):
+        # Выбранная категория сохраняется после обновления страницы.
 
-'''
+        self.page.open()
+        title = self.page.get_first_inactive_tab_title()
+        self.page.redirect_to_first_inactive_category_tab()
+        self.page.refresh()
+        title_active = self.page.get_active_tab_name()
+
+        self.assertEqual(title, title_active)
+    '''
+
     def test_events_no_geolocation(self):
         # Ошибка при отсутствии доступа к геолокации на вкладке “Рядом”.
 
@@ -54,4 +65,4 @@ class EventsTest(Test):
         text = self.page.get_notification_text()
 
         self.assertEqual(GEO_ERROR, text)
-'''
+

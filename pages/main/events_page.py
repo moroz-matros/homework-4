@@ -12,6 +12,9 @@ class EventsPage(Page):
     TAB_ACTIVE_CLASS = '.button-category_active'
     NOTIFICATION_TITLE_CLASS = '.notification-empty__title'
     NEAR_TAB = '[data-category="Ближайшие"]'
+    CONTAINER = '.events-table'
+
+    RECOMMEND = '#jsRecommendButton'
 
     def get_first_card_title(self):
         card = self.wait_until_and_get_elem_by_css(self.CARD_TITLE)
@@ -52,3 +55,7 @@ class EventsPage(Page):
     def get_notification_title(self):
         title = self.wait_until_and_get_elem_by_css(self.NOTIFICATION_TITLE_CLASS)
         return title.text
+
+    def get_recommend_tab(self):
+        tab = self.wait_until_and_get_elem_by_css(self.RECOMMEND)
+        return tab
