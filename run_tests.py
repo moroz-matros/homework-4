@@ -13,28 +13,31 @@ from cases.navbar_cases import NavbarTest
 from cases.other_profile_cases import OtherProfileTest
 from cases.profile.event_card_cases import ProfileEventCardTest
 from cases.profile.good_profile_change import ProfileChangeTest
+from cases.profile.good_profile_settings_change import ProfilePasswordChangeTest
 from cases.profile.profile_cases import ProfileTest
 from cases.registration_cases import RegistrationTest
 from cases.search_cases import SearchTest
 from cases.subscription_cases import SubscriptionTest
 
+
 if __name__ == '__main__':
     suite = unittest.TestSuite(
         (
-        # unittest.makeSuite(LoginTest), #ok++
-        # unittest.makeSuite(RegistrationTest), #ok++
-        # unittest.makeSuite(EventsTest), #ok++
-        # unittest.makeSuite(EventTest), #ok++
-        # unittest.makeSuite(SubscriptionTest), #++
-        # unittest.makeSuite(NavbarTest), #ok++
-        # unittest.makeSuite(SearchTest), #ok++
-        # unittest.makeSuite(OtherProfileTest), #ok-+
-        # unittest.makeSuite(ChatTest), #ok++
-        # unittest.makeSuite(ActivitySubscriptionTest), #ok++
-        # unittest.makeSuite(ActivityFavouriteTest), #ok-+
-        # unittest.makeSuite(ProfileTest), #--
-        # unittest.makeSuite(ProfileChangeTest), #+-
-        # unittest.makeSuite(ProfileEventCardTest) #ok-
+            #unittest.makeSuite(LoginTest),  #ok++
+            #unittest.makeSuite(RegistrationTest),  #ok++
+            #unittest.makeSuite(EventsTest),  #ok++
+            #unittest.makeSuite(EventTest),  #ok++
+            #unittest.makeSuite(SubscriptionTest),  #--
+            #unittest.makeSuite(NavbarTest),  #ok++
+            #unittest.makeSuite(SearchTest),  #ok++
+            unittest.makeSuite(OtherProfileTest),  #ok-+
+            #unittest.makeSuite(ChatTest),  #ok++
+            #unittest.makeSuite(ActivitySubscriptionTest),  #ok++
+            #unittest.makeSuite(ActivityFavouriteTest),  #ok-+
+            #unittest.makeSuite(ProfileTest),  #--
+            #unittest.makeSuite(ProfileChangeTest),  #+-
+            #unittest.makeSuite(ProfilePasswordChangeTest),  # +-
+            #unittest.makeSuite(ProfileEventCardTest) #ok-
     )
     )
 

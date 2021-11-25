@@ -16,10 +16,10 @@ class ProfileChangeTest(Test):
         self.login()
         self.page.open()
 
-    # def tearDown(self):
-    #     self.page.fill_name(self.NAME)
-    #     self.page.click_save_changes()
-    #     super().tearDown()
+    def tearDown(self):
+         self.page.fill_name(self.NAME)
+         self.page.click_save_changes()
+         super().tearDown()
 
     def test_profile_changes_ok(self):
         new_name = ''.join(random.choice(letters) for i in range(10))

@@ -62,8 +62,12 @@ class NavbarPage(Page):
         menu.click()
 
     def get_registration_logo(self):
-        logo = self.wait_until_and_get_elem_by_css(self.REGISTRATION)
-        return logo
+        try:
+            logo = self.wait_until_and_get_elem_by_css(self.REGISTRATION)
+            return logo
+        except StaleElementReferenceException:
+            logo = self.wait_until_and_get_elem_by_css(self.REGISTRATION)
+            return logo
 
 
 

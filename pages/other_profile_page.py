@@ -18,8 +18,12 @@ class OtherProfilePage(Page):
         self.open(self.BASE_URL + str(n))
 
     def click_subscribe(self):
-        button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
-        button.click()
+        try:
+            button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
+            button.click()
+        except:
+            button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
+            button.click()
 
     def get_subscribe_button_text(self):
         button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)

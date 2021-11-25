@@ -75,8 +75,9 @@ class SubscriptionTest(Test):
         self.profile_page.redirect_to_subscribed_to()
         text = self.page.get_no_one_text()
 
+        flag = (text == NO_ONE) or (text == NO_ONE_2)
         self.assertEqual(self.NAME2, name)
-        self.assertEqual(NO_ONE, text)
+        self.assertTrue(flag)
 
     def test_subscriptions_no_subscribed_to(self):
         # При отсутствии подписок выдает соответствующее сообщение.

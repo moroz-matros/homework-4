@@ -12,8 +12,6 @@ NAME_ERROR = 'Имя не должно быть пустым или содерж
 DATE_ERROR = 'Некорректный формат даты рождения.'
 EMAIL_ERROR = 'Неправильный формат электронной почты.'
 
-PASSWORD_CHANGE_SUCCESS = 'Пароль успешно изменен.'
-
 AVATAR_ERROR = 'Только картинки, пожалуйста!!!'
 
 
@@ -154,31 +152,6 @@ class ProfileTest(Test):
         error = self.page.get_email_error_text()
 
         self.assertEqual(EMAIL_ERROR, error)
-
-    def test_profile_settings_change_ok(self):
-        # Сохраняет при вводе корректных старого и нового паролей (новый пароль >=6 символов).
-
-        new_password = ''.join(random.choice(letters) for i in range(10))
-        print(new_password)
-
-        self.page.redirect_to_settings()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
-
-        # тут не успевает подгрузиться
-
-        self.page.fill_old_password(self.PASSWORD)
-        self.page.fill_new_password(new_password)
-        self.page.click_save_changes()
-
-        success = self.page.get_password_success()
-
-        # тут не успевает подгрузиться
-
-        self.page.fill_old_password(new_password)
-        self.page.fill_new_password(self.PASSWORD)
-        self.page.click_save_changes()
-
-        self.assertEqual(PASSWORD_CHANGE_SUCCESS, success)
 
     '''<BUG>
     Остальное здесь забаговано, так как кто-то забыл повесить проверки /:
