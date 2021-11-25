@@ -17,6 +17,7 @@ class ProfileChangeTest(Test):
         self.page.open()
 
     def tearDown(self):
+        self.page.open()
         self.page.fill_name(self.NAME)
         self.page.click_save_changes()
         super().tearDown()

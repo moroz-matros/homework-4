@@ -15,8 +15,6 @@ class ActivityFavouriteTest(Test):
         self.other_profile_page = OtherProfilePage(self.driver)
         self.other_profile_page.open_other_profile(self.ID2)
 
-        #тут не успевает прогружаться иногда
-
         self.other_profile_page.click_subscribe()
         self.logout()
 
@@ -40,8 +38,6 @@ class ActivityFavouriteTest(Test):
         self.logout()
         self.login()
         self.other_profile_page.open_other_profile(self.ID2)
-
-        #тут не успевает прогружаться иногда
 
         self.other_profile_page.click_subscribe()
         super().tearDown()

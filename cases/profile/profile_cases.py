@@ -25,8 +25,6 @@ class ProfileTest(Test):
     def test_profile_change_avatar(self):
         # Загружает картинку, показывает превью.
 
-        # тут очень редко не успевает подгрузиться
-
         avatar_before = self.page.get_avatar_url()
         new_avatar_path = os.path.join(os.getcwd(), 'files', '1.png')
         self.page.send_file(self.page.change_avatar, new_avatar_path)
@@ -37,7 +35,9 @@ class ProfileTest(Test):
     def test_profile_change_avatar_error_not_pic(self):
         # Ошибка при попытке загрузки не картинки.
 
-        self.page.upload_avatar('/files/1.zip')
+        new_avatar_path = os.path.join(os.getcwd(), 'files', '1.zip')
+        self.page.send_file(self.page.change_avatar, new_avatar_path)
+        self.page.get_submit_avatar_button()
         text = self.page.get_avatar_error()
 
         self.assertEqual(AVATAR_ERROR, text)
@@ -156,3 +156,4 @@ class ProfileTest(Test):
     '''<BUG>
     Остальное здесь забаговано, так как кто-то забыл повесить проверки /:
     '''
+

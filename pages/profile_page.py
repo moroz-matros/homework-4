@@ -95,8 +95,7 @@ class ProfilePage(Page):
     def upload_avatar(self, text):
         button = self.wait_until_and_get_elem_by_css(self.UPLOAD_AVATAR_BUTTON)
         button.click()
-        dir = str(pathlib.Path(__file__).parent.parent)
-        pyautogui.write(dir + text)
+        pyautogui.write(text)
         pyautogui.press('enter')
 
     def get_avatar_pic_style(self):

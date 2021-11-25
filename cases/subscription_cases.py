@@ -57,6 +57,7 @@ class SubscriptionTest(Test):
 
         self.assertEqual(self.NAME, name)
         self.assertTrue(flag)
+    
 
     def test_subscriptions_add_remove_subscribed_to(self):
         # Наличие карточки с пользователем после появления подписки. Ее отсутствие после отписки.
@@ -92,6 +93,7 @@ class SubscriptionTest(Test):
                          SUBSCRIBED_TO + ', вернулась страница ' + tab)
         self.assertEqual(NO_ONE, text)
 
+
     def test_subscriptions_tabs_refresh(self):
         # Происходит переключение между вкладками.
         # При обновлении страницы выбранная вкладка сохраняется.
@@ -113,5 +115,6 @@ class SubscriptionTest(Test):
         self.assertEqual(SUBSCRIBERS, tab_subscribers1, 'неправильный редирект по ссылке ' + SUBSCRIBERS)
         self.assertEqual(SUBSCRIBERS, tab_subscribers2,
                          'вкладка ' + SUBSCRIBERS + ' сбрасывается при обновлении страницы')
+
 
 

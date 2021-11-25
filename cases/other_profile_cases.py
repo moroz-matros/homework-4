@@ -20,11 +20,11 @@ class OtherProfileTest(Test):
     def test_chat_redirect_ok(self):
         # (доступно после авторизации) При клике происходит переход на страницу чата с этим пользователем
         button = self.page.get_write_message_button()
-
         self.assertFalse(button.is_displayed())
 
         self.login()
         self.page.open_other_profile(self.ID2)
+        self.page.refresh()
         self.page.click_write_message()
         chat_page = ChatPage(self.driver)
         name = chat_page.get_current_chat_user_name()
@@ -39,6 +39,7 @@ class OtherProfileTest(Test):
 
         self.login()
         self.page.open_other_profile(self.ID2)
+        self.page.refresh()
         subscribe_text = self.page.get_subscribe_button_text()
         self.page.click_subscribe()
         unsubscribe_text = self.page.get_subscribe_button_text()
