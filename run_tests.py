@@ -30,14 +30,14 @@ if __name__ == '__main__':
             #unittest.makeSuite(SubscriptionTest),  #--
             #unittest.makeSuite(NavbarTest),  #ok++
             #unittest.makeSuite(SearchTest),  #ok++
-            unittest.makeSuite(OtherProfileTest),  #ok-+
+            #unittest.makeSuite(OtherProfileTest),  #ok--
             #unittest.makeSuite(ChatTest),  #ok++
             #unittest.makeSuite(ActivitySubscriptionTest),  #ok++
-            #unittest.makeSuite(ActivityFavouriteTest),  #ok-+
+            #unittest.makeSuite(ActivityFavouriteTest),  #ok--
             #unittest.makeSuite(ProfileTest),  #--
-            #unittest.makeSuite(ProfileChangeTest),  #+-
-            #unittest.makeSuite(ProfilePasswordChangeTest),  # +-
-            #unittest.makeSuite(ProfileEventCardTest) #ok-
+            #unittest.makeSuite(ProfileChangeTest),  #++
+            #unittest.makeSuite(ProfilePasswordChangeTest),  # ++
+            unittest.makeSuite(ProfileEventCardTest) #ok-
     )
     )
 

@@ -189,13 +189,16 @@ class ProfilePage(Page):
             field.send_keys(text)
 
     def click_save_changes(self):
-        button = self.wait_until_and_get_elem_by_css(self.SAVE_BUTTON)
-        button.click()
+        try:
+            button = self.wait_until_and_get_elem_by_css(self.SAVE_BUTTON)
+            button.click()
+        except:
+            button = self.wait_until_and_get_elem_by_css(self.SAVE_BUTTON)
+            button.click()
 
     def redirect_to_about(self):
         tab = self.wait_until_and_get_elem_by_css(self.ABOUT_TAB)
         tab.click()
-
 
     def get_about(self):
         field = self.wait_until_and_get_elem_by_name(self.ABOUT)
@@ -273,9 +276,8 @@ class ProfilePage(Page):
         text = self.wait_until_and_get_elem_by_css(self.PASSWORD_ERROR)
         return text.text
 
-    def get_profile_name(self):
-        text = self.wait_until_and_get_elem_by_css(self.PROFILE_NAME)
-        return text.text
-
-
-
+    def get_changed_profile_name(self, old_name):
+        text = self.wait_until_and_get_elem_by_css(self.PROFILE_NAME).text
+        while text == old_name or text is None:
+            text = self.wait_until_and_get_elem_by_css(self.PROFILE_NAME).text
+        return text

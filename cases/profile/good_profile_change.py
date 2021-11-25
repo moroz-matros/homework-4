@@ -17,9 +17,9 @@ class ProfileChangeTest(Test):
         self.page.open()
 
     def tearDown(self):
-         self.page.fill_name(self.NAME)
-         self.page.click_save_changes()
-         super().tearDown()
+        self.page.fill_name(self.NAME)
+        self.page.click_save_changes()
+        super().tearDown()
 
     def test_profile_changes_ok(self):
         new_name = ''.join(random.choice(letters) for i in range(10))
@@ -32,8 +32,6 @@ class ProfileChangeTest(Test):
         self.page.redirect_to_about()
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
 
-        # тут не успевает подгрузиться
-
         self.page.fill_name(new_name)
         self.page.fill_about(new_about)
         self.page.fill_birthday(new_date)
@@ -42,12 +40,11 @@ class ProfileChangeTest(Test):
 
         self.page.click_save_changes()
 
-        self.page.refresh()
+        self.page.open()
+        self.page.redirect_to_about()
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
 
-        # тут не успевает подгрузиться
-
-        name = self.page.get_profile_name()
+        name = self.page.get_changed_profile_name(self.NAME)
         about = self.page.get_about()
         date = self.page.get_birthday()
         city = self.page.get_city()

@@ -5,6 +5,7 @@ from pages.other_profile_page import OtherProfilePage
 SUBSCRIBE = 'Подписаться'
 UNSUBSCRIBE = 'Отписаться'
 
+
 class OtherProfileTest(Test):
     def setUp(self):
         super().setUp()
@@ -38,7 +39,6 @@ class OtherProfileTest(Test):
 
         self.login()
         self.page.open_other_profile(self.ID2)
-        self.page.refresh()
         subscribe_text = self.page.get_subscribe_button_text()
         self.page.click_subscribe()
         unsubscribe_text = self.page.get_subscribe_button_text()
@@ -46,17 +46,3 @@ class OtherProfileTest(Test):
 
         self.assertEqual(SUBSCRIBE, subscribe_text)
         self.assertEqual(UNSUBSCRIBE, unsubscribe_text)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
