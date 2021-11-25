@@ -17,6 +17,7 @@ class ChatTest(Test):
         self.page = ChatPage(self.driver)
         self.other_profile = OtherProfilePage(self.driver)
         self.other_profile.open_other_profile(self.ID2)
+        self.page.refresh()
 
     def test_chat_non_read_messages(self):
         # Непрочитанные сообщения выделяются цветом.

@@ -1,4 +1,3 @@
-import os
 import random
 import string
 import time
@@ -11,6 +10,8 @@ letters = string.ascii_lowercase
 NAME_ERROR = 'Имя не должно быть пустым или содержать цифры, спецсимволы и знаки препинания.'
 DATE_ERROR = 'Некорректный формат даты рождения.'
 EMAIL_ERROR = 'Неправильный формат электронной почты.'
+
+PASSWORD_CHANGE_SUCCESS = 'Пароль успешно изменен.'
 
 AVATAR_ERROR = 'Только картинки, пожалуйста!!!'
 
@@ -25,19 +26,16 @@ class ProfileTest(Test):
     def test_profile_change_avatar(self):
         # Загружает картинку, показывает превью.
 
-        avatar_before = self.page.get_avatar_url()
-        new_avatar_path = os.path.join(os.getcwd(), 'files', '1.png')
-        self.page.send_file(self.page.change_avatar, new_avatar_path)
-        self.page.get_submit_avatar_button()
-        avatar_after = self.page.get_avatar_url()
-        self.assertNotEqual(avatar_before, avatar_after)
+        style_before = self.page.get_avatar_pic_style()
+        self.page.upload_avatar('/files/1.png')
+        style_after = self.page.get_new_avatar_pic_style(style_before)
+
+        self.assertNotEqual(style_before, style_after)
 
     def test_profile_change_avatar_error_not_pic(self):
         # Ошибка при попытке загрузки не картинки.
 
-        new_avatar_path = os.path.join(os.getcwd(), 'files', '1.zip')
-        self.page.send_file(self.page.change_avatar, new_avatar_path)
-        self.page.get_submit_avatar_button()
+        self.page.upload_avatar('/files/1.zip')
         text = self.page.get_avatar_error()
 
         self.assertEqual(AVATAR_ERROR, text)
@@ -123,7 +121,7 @@ class ProfileTest(Test):
     def test_profile_birthday_format_error(self):
         # При вводе чего-либо вне формата и попытке сохранить высвечивается предупреждение.
 
-        n = random.randint(1, 27)
+        n = random.randint(10, 27)
         new_date = '2000/01/' + str(n)
 
         self.page.redirect_to_about()
@@ -156,4 +154,3 @@ class ProfileTest(Test):
     '''<BUG>
     Остальное здесь забаговано, так как кто-то забыл повесить проверки /:
     '''
-

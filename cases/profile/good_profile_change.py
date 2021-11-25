@@ -18,6 +18,7 @@ class ProfileChangeTest(Test):
 
     def tearDown(self):
         self.page.open()
+        self.page.redirect_to_about()
         self.page.fill_name(self.NAME)
         self.page.click_save_changes()
         super().tearDown()
@@ -43,7 +44,6 @@ class ProfileChangeTest(Test):
 
         self.page.open()
         self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
 
         name = self.page.get_changed_profile_name(self.NAME)
         about = self.page.get_about()

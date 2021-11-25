@@ -1,3 +1,5 @@
+from selenium.common.exceptions import StaleElementReferenceException
+
 from pages.base_page import Page
 
 
@@ -36,9 +38,13 @@ class SearchPage(Page):
         text = self.wait_until_and_get_elem_by_css(self.NOTHING)
         return text.text
 
-    def redirect_to_tab(self, tab):
-        tab = self.wait_until_and_get_elem_by_css(tab)
-        tab.click()
+    def redirect_to_tab(self, tab_name):
+        try:
+            tab = self.wait_until_and_get_elem_by_css(tab_name)
+            tab.click()
+        except StaleElementReferenceException:
+            tab = self.wait_until_and_get_elem_by_css(tab_name)
+            tab.click()
 
     def get_first_event_title(self):
         title = self.wait_until_and_get_elem_by_css(self.EVENT_TITLE)

@@ -23,12 +23,10 @@ class ProfilePage(Page):
     SETTINGS_TAB = '#settingsTab'
 
     UPLOAD_AVATAR_BUTTON = '#jsUploadAvatar'
+    NEW_AVATAR = '#imageFile'
     AVATAR = '#profileAvatar'
-    AVATAR_IMAGE = '.my-profile-header__avatar-block'
     SUBMIT_AVATAR = '#jsSubmitAvatar'
     AVATAR_ERROR = '#jsErrorAvatar'
-    FILE_INPUT = '#imageFile'
-    CHANGE_AVATAR_BUTTON = '.change-avatar-button'
 
     ARROW = 'button.smbs-event__arrow-down'
     EVENT_DESCRIPTION = '.smbs-event__text'
@@ -44,6 +42,7 @@ class ProfilePage(Page):
     EMAIL = 'email'
     SAVE_BUTTON = '#postProfile'
     CONTAINER_BOTTOM = '#changing-content'
+    PROFILE_NAME = '.my-profile-header__title'
 
     NAME_ERROR = '#nicknameError'
     ABOUT_ERROR = '#aboutError'
@@ -56,7 +55,6 @@ class ProfilePage(Page):
     PASSWORD_ERROR = '#jsPasswordError'
     PASSWORD_SUCCESS = '#jsPasswordSuccess'
 
-    PROFILE_NAME = '.my-profile-header__title'
 
     def get_first_event_title(self):
         title = self.wait_until_and_get_elem_by_css(self.TITLE_CLASS)
@@ -82,122 +80,148 @@ class ProfilePage(Page):
             button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBED_TO)
             button.click()
 
-    def send_file(self, open, path):
-        open()
-
-        avatar_input = self.locate_hidden_el(self.FILE_INPUT)
-        avatar_input.send_keys(path)
-
-    def change_avatar(self):
-        tag = self.wait_until_and_get_elem_by_css(self.CHANGE_AVATAR_BUTTON)
-        tag.click()
-
     def upload_avatar(self, text):
-        button = self.wait_until_and_get_elem_by_css(self.UPLOAD_AVATAR_BUTTON)
-        button.click()
-        pyautogui.write(text)
-        pyautogui.press('enter')
+        dir = str(pathlib.Path(__file__).parent.parent)
+        try:
+            button = self.wait_presence_until_and_get_elem_by_css(self.NEW_AVATAR)
+            button.send_keys(dir + text)
+        except:
+            button = self.wait_presence_until_and_get_elem_by_css(self.NEW_AVATAR)
+            button.send_keys(dir + text)
 
     def get_avatar_pic_style(self):
         avatar = self.wait_until_and_get_elem_by_css(self.AVATAR)
         return avatar.get_attribute('style')
 
-    def get_avatar_url(self):
-        return self.wait_until_and_get_elem_by_css(self.AVATAR_IMAGE).get_attribute('style').split("\"", 2)[1]
+    def get_new_avatar_pic_style(self, old):
+        try:
+            avatar = self.wait_until_and_get_elem_by_css(self.AVATAR).get_attribute('style')
+        except:
+            avatar = self.wait_until_and_get_elem_by_css(self.AVATAR).get_attribute('style')
+        while avatar == old:
+            try:
+                avatar = self.wait_until_and_get_elem_by_css(self.AVATAR).get_attribute('style')
+            except:
+                avatar = self.wait_until_and_get_elem_by_css(self.AVATAR).get_attribute('style')
+        return avatar
 
     def get_submit_avatar_button(self):
         button = self.wait_until_and_get_elem_by_css(self.SUBMIT_AVATAR)
         return button
 
     def get_avatar_error(self):
-        text = self.wait_until_and_get_elem_by_css(self.AVATAR_ERROR)
-        return text.text
+        try:
+            text = self.wait_presence_until_and_get_elem_by_css(self.AVATAR_ERROR)
+            return text.text
+        except:
+            text = self.wait_presence_until_and_get_elem_by_css(self.AVATAR_ERROR)
+            return text.text
 
     def click_arrow(self):
-        button = self.wait_until_and_get_elem_by_css(self.ARROW)
-        button.click()
+        try:
+            button = self.wait_until_and_get_elem_by_css(self.ARROW)
+            button.click()
+        except:
+            button = self.wait_until_and_get_elem_by_css(self.ARROW)
+            button.click()
 
     def get_event_description(self):
-        text = self.wait_until_and_get_elem_by_css(self.EVENT_DESCRIPTION)
-        return text.text
+        try:
+            text = self.wait_until_and_get_elem_by_css(self.EVENT_DESCRIPTION)
+            return text.text
+        except:
+            text = self.wait_until_and_get_elem_by_css(self.EVENT_DESCRIPTION)
+            return text.text
 
     def get_event_title(self):
         text = self.wait_until_and_get_elem_by_css(self.EVENT_TITLE)
         return text.text
 
     def click_share_button(self):
-        button = self.wait_until_and_get_elem_by_css(self.SHARE_BUTTON)
-        button.click()
+        try:
+            button = self.wait_until_and_get_elem_by_css(self.SHARE_BUTTON)
+            button.click()
+        except:
+            button = self.wait_until_and_get_elem_by_css(self.SHARE_BUTTON)
+            button.click()
 
     def get_vk_button(self):
-        button = self.wait_until_and_get_elem_by_css(self.VK_BUTTON)
-        return button
+        try:
+            button = self.wait_until_and_get_elem_by_css(self.VK_BUTTON)
+            return button
+        except:
+            button = self.wait_until_and_get_elem_by_css(self.VK_BUTTON)
+            return button
 
     def get_copy_button(self):
-        button = self.wait_until_and_get_elem_by_css(self.COPY_BUTTON)
-        return button
+        try:
+            button = self.wait_until_and_get_elem_by_css(self.COPY_BUTTON)
+            return button
+        except:
+            button = self.wait_until_and_get_elem_by_css(self.COPY_BUTTON)
+            return button
 
     def fill_name(self, text):
         try:
-            field = self.wait_until_and_get_elem_by_name(self.NAME)
+            field = self.wait_presence_until_and_get_elem_by_name(self.NAME)
             field.clear()
             field.send_keys(text)
         except:
-            field = self.wait_until_and_get_elem_by_name(self.NAME)
+            field = self.wait_presence_until_and_get_elem_by_name(self.NAME)
             field.clear()
             field.send_keys(text)
 
     def fill_about(self, text):
         try:
-            field = self.wait_until_and_get_elem_by_name(self.ABOUT)
+            field = self.wait_presence_until_and_get_elem_by_name(self.ABOUT)
             field.clear()
             field.send_keys(text)
         except:
-            field = self.wait_until_and_get_elem_by_name(self.ABOUT)
+            field = self.wait_presence_until_and_get_elem_by_name(self.ABOUT)
             field.clear()
             field.send_keys(text)
 
     def fill_city(self, text):
         try:
-            field = self.wait_until_and_get_elem_by_name(self.CITY)
+            field = self.wait_presence_until_and_get_elem_by_name(self.CITY)
             field.clear()
             field.send_keys(text)
         except:
-            field = self.wait_until_and_get_elem_by_name(self.CITY)
+            field = self.wait_presence_until_and_get_elem_by_name(self.CITY)
             field.clear()
             field.send_keys(text)
 
     def fill_birthday(self, text):
         try:
-            field = self.wait_until_and_get_elem_by_name(self.DATE)
+            field = self.wait_presence_until_and_get_elem_by_name(self.DATE)
             field.clear()
             field.send_keys(text)
         except:
-            field = self.wait_until_and_get_elem_by_name(self.DATE)
+            field = self.wait_presence_until_and_get_elem_by_name(self.DATE)
             field.clear()
             field.send_keys(text)
 
     def fill_email(self, text):
         try:
-            field = self.wait_until_and_get_elem_by_name(self.EMAIL)
+            field = self.wait_presence_until_and_get_elem_by_name(self.EMAIL)
             field.clear()
             field.send_keys(text)
         except:
-            field = self.wait_until_and_get_elem_by_name(self.EMAIL)
+            field = self.wait_presence_until_and_get_elem_by_name(self.EMAIL)
             field.clear()
             field.send_keys(text)
 
     def click_save_changes(self):
-        try:
-            button = self.wait_until_and_get_elem_by_css(self.SAVE_BUTTON)
-            button.click()
-        except:
-            button = self.wait_until_and_get_elem_by_css(self.SAVE_BUTTON)
-            button.click()
+        button = self.wait_until_and_get_elem_by_css(self.SAVE_BUTTON)
+        button.click()
 
     def redirect_to_about(self):
-        tab = self.wait_until_and_get_elem_by_css(self.ABOUT_TAB)
-        tab.click()
+        try:
+            tab = self.wait_until_and_get_elem_by_css(self.ABOUT_TAB)
+            tab.click()
+        except:
+            tab = self.wait_until_and_get_elem_by_css(self.ABOUT_TAB)
+            tab.click()
 
     def get_about(self):
         field = self.wait_until_and_get_elem_by_name(self.ABOUT)
@@ -216,12 +240,13 @@ class ProfilePage(Page):
         return field.get_attribute('value')
 
     def get_name_error_text(self):
-        try:
-            text = self.wait_until_and_get_elem_by_css(self.NAME_ERROR)
-            return text.text
-        except:
-            text = self.wait_until_and_get_elem_by_css(self.NAME_ERROR)
-            return text.text
+        text = self.wait_until_and_get_elem_by_css(self.NAME_ERROR).text
+        while text == '':
+            try:
+                text = self.wait_until_and_get_elem_by_css(self.NAME_ERROR).text
+            except:
+                text = self.wait_until_and_get_elem_by_css(self.NAME_ERROR).text
+        return text
 
     def get_about_error_text(self):
         text = self.wait_until_and_get_elem_by_css(self.ABOUT_ERROR)
@@ -240,7 +265,7 @@ class ProfilePage(Page):
         return text.text
 
     def redirect_to_settings(self):
-        settings = self.wait_until_and_get_elem_by_css(self.SETTINGS_TAB)
+        settings = self.wait_presence_until_and_get_elem_by_css(self.SETTINGS_TAB)
         settings.click()
 
     def fill_old_password(self, text):
@@ -275,8 +300,14 @@ class ProfilePage(Page):
         text = self.wait_until_and_get_elem_by_css(self.PASSWORD_ERROR)
         return text.text
 
-    def get_changed_profile_name(self, old_name):
+    def get_profile_name(self):
+        text = self.wait_until_and_get_elem_by_css(self.PROFILE_NAME)
+        return text.text
+
+    def get_changed_profile_name(self, name):
         text = self.wait_until_and_get_elem_by_css(self.PROFILE_NAME).text
-        while text == old_name or text is None:
+        while text == name:
             text = self.wait_until_and_get_elem_by_css(self.PROFILE_NAME).text
         return text
+
+
