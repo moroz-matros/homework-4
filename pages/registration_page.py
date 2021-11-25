@@ -11,6 +11,7 @@ class RegistrationPage(Page):
     NAME_INPUT = 'input[name="name"]'
     REGISTRATION_BUTTON = '#postRegistration'
     REDIRECT = '.form__bottom-text_anchor'
+    CONTAINER = '.container'
 
     LOGIN_ERROR = '#loginError'
     PASSWORD_ERROR = '#passwordError'
