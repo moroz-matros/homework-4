@@ -19,6 +19,8 @@ class EventPage(Page):
     VK_BUTTON = '#vkshare0'
     COPY_BUTTON = '#copyButton'
 
+    DESCRIPTION = '.event-description__body'
+
     def get_title(self):
         title = self.wait_until_and_get_elem_by_css(self.TITLE)
         return title.text
@@ -56,6 +58,6 @@ class EventPage(Page):
         tag = self.wait_until_and_get_elem_by_css(self.CATEGORY)
         tag.click()
 
-
-
-
+    def get_description(self):
+        text = self.wait_until_and_get_elem_by_css(self.DESCRIPTION)
+        return text.text
