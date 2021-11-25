@@ -58,7 +58,7 @@ class NavbarPage(Page):
         logout.click()
 
     def open_menu(self):
-        menu = self.wait_until_and_get_elem_by_css(self.DROP_DOWN_MENU)
+        menu = self.wait_presence_until_and_get_elem_by_css(self.DROP_DOWN_MENU)
         menu.click()
 
     def get_registration_logo(self):

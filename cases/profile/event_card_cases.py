@@ -29,7 +29,6 @@ class ProfileEventCardTest(Test):
     def test_profile_events_card_change(self):
         # При нажатии на стрелку на карточке показывается описание события. При повторном нажатии на стрелку на карточке в описании возвращается исходный вид.
 
-        self.page.refresh()
         self.page.click_arrow()
         text = self.page.get_event_description()
         self.page.click_arrow()
@@ -41,7 +40,6 @@ class ProfileEventCardTest(Test):
     def test_profile_events_card_share(self):
         # При нажатии на кнопку шаринга появляется окно со ссылкой, где есть кнопка “скопировать” и “поделиться в вк”.
 
-        self.page.refresh()
 
         self.page.click_arrow()
         self.page.click_share_button()

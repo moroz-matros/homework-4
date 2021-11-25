@@ -261,7 +261,7 @@ class ProfilePage(Page):
         return text.text
 
     def get_email_error_text(self):
-        text = self.wait_until_and_get_elem_by_css(self.EMAIL_ERROR)
+        text = self.wait_presence_until_and_get_elem_by_css(self.EMAIL_ERROR)
         return text.text
 
     def redirect_to_settings(self):
