@@ -27,12 +27,10 @@ class NavbarPage(Page):
         return name_text.text
 
     def click_logo(self):
-        try:
-            logo = self.wait_visibility_until_and_get_elem_by_css(self.LOGO)
-            logo.click()
-        except StaleElementReferenceException:
-            logo = self.wait_visibility_until_and_get_elem_by_css(self.LOGO)
-            logo.click()
+        logo = self.wait_clickable_until_and_get_elem_by_css(self.LOGO)
+        while not logo.is_enabled():
+            continue
+        logo.click()
 
     def click_bell(self):
         bell = self.wait_visibility_until_and_get_elem_by_css(self.BELL)
@@ -63,12 +61,12 @@ class NavbarPage(Page):
         menu.click()
 
     def get_registration_logo(self):
-        try:
-            logo = self.wait_visibility_until_and_get_elem_by_css(self.REGISTRATION)
-            return logo
-        except StaleElementReferenceException:
-            logo = self.wait_visibility_until_and_get_elem_by_css(self.REGISTRATION)
-            return logo
+        logo = self.wait_visibility_until_and_get_elem_by_css(self.REGISTRATION)
+        return logo
+
+    def get_menu(self):
+        menu = self.wait_clickable_until_and_get_elem_by_css(self.DROP_DOWN_MENU)
+        return menu
 
 
 

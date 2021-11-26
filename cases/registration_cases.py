@@ -3,7 +3,6 @@ import random
 
 from cases.base_cases import Test
 from pages.login_page import LoginPage
-from pages.navbar_page import NavbarPage
 from pages.registration_page import RegistrationPage
 
 letters = string.ascii_lowercase
@@ -86,14 +85,6 @@ class RegistrationTest(Test):
     ''' <BUG>
     def test_registration_long_login(self):
         # Ошибка при регистрации: длинного логина (>256 символов).
-
-        self.page.open()
-        self.page.fill_form(long_string, good_password, good_name)
-        self.page.click_registration_button()
-
-        error_text = self.page.get_login_error()
-
-        self.assertEqual(LOGIN_LONG_ERROR_TEXT, error_text)
     '''
 
     def test_registration_existing_login(self):
@@ -126,14 +117,6 @@ class RegistrationTest(Test):
     '''<BUG>
     def test_registration_long_password(self):
         # Ошибка при регистрации: длинного пароля (>256 символов).
-
-        self.page.open()
-        self.page.fill_form(good_login, long_string, good_name)
-        self.page.click_registration_button()
-
-        error_text = self.page.get_password_error()
-
-        self.assertEqual(LOGIN_LONG_ERROR_TEXT, error_text)
     '''
 
     def test_registration_number_in_name(self):
@@ -180,15 +163,6 @@ class RegistrationTest(Test):
 
     '''<BUG>
     def test_registration_long_name(self):
-        # Ошибка при регистрации: длинного имени (>256 символов).
-
-        self.page.open()
-        self.page.fill_form(good_login, good_password, long_string)
-        self.page.click_registration_button()
-
-        error_text = self.page.get_name_error()
-
-        self.assertEqual(NAME_LONG_ERROR_TEXT, error_text)
     '''
 
     def test_registration_empty_name(self):

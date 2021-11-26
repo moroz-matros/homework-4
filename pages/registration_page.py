@@ -27,11 +27,11 @@ class RegistrationPage(Page):
         name_input.send_keys(name)
 
     def click_registration_button(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.REGISTRATION_BUTTON)
+        button = self.wait_clickable_until_and_get_elem_by_css(self.REGISTRATION_BUTTON)
         button.click()
 
     def click_redirect(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.REDIRECT)
+        button = self.wait_clickable_until_and_get_elem_by_css(self.REDIRECT)
         button.click()
 
     def get_form_title(self):

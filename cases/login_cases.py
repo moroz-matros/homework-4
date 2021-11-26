@@ -5,7 +5,6 @@ from pages.login_page import LoginPage
 from pages.navbar_page import NavbarPage
 from pages.registration_page import RegistrationPage
 
-
 letters = string.ascii_lowercase
 
 short_login = 'bad'
@@ -105,14 +104,6 @@ class LoginTest(Test):
     ''' <BUG>
     def test_login_long_login(self):
         # Ошибка при авторизации: с длинным логином (>256 символов). 
-
-        self.page.open()
-        self.page.fill_form(long_string, good_password)
-        self.page.click_login_button()
-
-        error_text = self.page.get_login_error()
-
-        self.assertEqual(LOGIN_LONG_ERROR_TEXT, error_text)
     '''
 
     def test_login_wrong_password(self):
@@ -158,14 +149,6 @@ class LoginTest(Test):
     ''' <BUG>
     def test_login_long_password(self):
         # Ошибка при авторизации: с длинным паролем (>256 символов). <BUG>
-
-        self.page.open()
-        self.page.fill_form(good_login, long_string)
-        self.page.click_login_button()
-
-        error_text = self.page.get_password_error()
-
-        self.assertEqual(PASSWORD_LONG_ERROR_TEXT, error_text)
     '''
 
     def test_login_redirect_to_registration(self):

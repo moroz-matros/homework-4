@@ -26,24 +26,24 @@ class EventPage(Page):
         return title.text
 
     def click_star(self):
-        star = self.wait_visibility_until_and_get_elem_by_css(self.STAR)
+        star = self.wait_clickable_until_and_get_elem_by_css(self.STAR)
         star.click()
 
     def click_share(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.SHARE_BUTTON)
+        button = self.wait_clickable_until_and_get_elem_by_css(self.SHARE_BUTTON)
         button.click()
 
     def get_vk_button(self):
-        return self.wait_visibility_until_and_get_elem_by_css(self.VK_BUTTON)
+        return self.wait_clickable_until_and_get_elem_by_css(self.VK_BUTTON)
 
     def get_copy_button(self):
-        return self.wait_visibility_until_and_get_elem_by_css(self.COPY_BUTTON)
+        return self.wait_clickable_until_and_get_elem_by_css(self.COPY_BUTTON)
 
     def get_friends_list(self):
         return self.wait_visibility_until_and_get_elem_by_css(self.FRIENDS_LIST)
 
     def click_invite(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.INVITE_BUTTON)
+        button = self.wait_clickable_until_and_get_elem_by_css(self.INVITE_BUTTON)
         button.click()
 
     def get_status_text(self):
@@ -55,7 +55,7 @@ class EventPage(Page):
         return tag.text
 
     def redirect_first_tag_search(self):
-        tag = self.wait_visibility_until_and_get_elem_by_css(self.CATEGORY)
+        tag = self.wait_clickable_until_and_get_elem_by_css(self.CATEGORY)
         tag.click()
 
     def get_description(self):

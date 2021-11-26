@@ -1,7 +1,6 @@
 from cases.base_cases import Test
 from pages.event_page import EventPage
 from pages.events_page import EventsPage
-from selenium.webdriver import ChromeOptions, Chrome
 
 
 GEO_ERROR = 'Ошибка при определении местоположения'
@@ -49,14 +48,6 @@ class EventsTest(Test):
     ''' <BUG>
     def test_events_tab_save_refresh(self):
         # Выбранная категория сохраняется после обновления страницы.
-
-        self.page.open()
-        title = self.page.get_first_inactive_tab_title()
-        self.page.redirect_to_first_inactive_category_tab()
-        self.page.refresh()
-        title_active = self.page.get_active_tab_name()
-
-        self.assertEqual(title, title_active)
     '''
 
     def test_events_no_geolocation(self):

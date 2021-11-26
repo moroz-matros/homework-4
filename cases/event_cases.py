@@ -18,6 +18,9 @@ class EventTest(Test):
         first_event = main_page.get_first_card_pic()
         self.page.BASE_URL = self.page.BASE_URL + first_event.get_attribute("id")
         self.login()
+        self.page.open()
+        if self.page.get_status_text() == 'Уже иду!':
+            self.page.click_star()
 
     def test_event_like_dislike_ok(self):
         # Лайк события добавляет мероприятие в избранное.

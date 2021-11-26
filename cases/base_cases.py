@@ -45,6 +45,8 @@ class Test(unittest.TestCase):
         login_page.open()
         login_page.fill_form(self.LOGIN, self.PASSWORD)
         login_page.click_login_button()
+        navbar = NavbarPage(self.driver)
+        navbar.get_menu()
 
     def login2(self):
         login_page = LoginPage(self.driver)
@@ -52,11 +54,14 @@ class Test(unittest.TestCase):
         login_page.wait_for_page(login_page.CONTAINER)
         login_page.fill_form(self.LOGIN2, self.PASSWORD2)
         login_page.click_login_button()
+        navbar = NavbarPage(self.driver)
+        navbar.get_menu()
 
     def logout(self):
         navbar = NavbarPage(self.driver)
         navbar.open_menu()
         navbar.click_logout()
+        navbar.get_registration_logo()
 
     def go_to_main(self):
         self.page.open(self.page.BASE_URL)

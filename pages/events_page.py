@@ -21,19 +21,19 @@ class EventsPage(Page):
         return card.text
 
     def get_first_card_pic(self):
-        card = self.wait_visibility_until_and_get_elem_by_css(self.CARD_PIC)
+        card = self.wait_clickable_until_and_get_elem_by_css(self.CARD_PIC)
         return card
 
     def redirect_to_first_card_by_pic(self):
-        pic = self.wait_visibility_until_and_get_elem_by_css(self.CARD_PIC)
+        pic = self.wait_clickable_until_and_get_elem_by_css(self.CARD_PIC)
         pic.click()
 
     def redirect_to_first_card_by_card(self):
-        card = self.wait_visibility_until_and_get_elem_by_css(self.CARD_CLASS)
+        card = self.wait_clickable_until_and_get_elem_by_css(self.CARD_CLASS)
         card.click()
 
     def redirect_to_first_inactive_category_tab(self):
-        tab = self.wait_visibility_until_and_get_elem_by_css(self.TAB_INACTIVE_CLASS)
+        tab = self.wait_clickable_until_and_get_elem_by_css(self.TAB_INACTIVE_CLASS)
         tab.click()
 
     def get_first_inactive_tab_title(self):
@@ -49,7 +49,7 @@ class EventsPage(Page):
         return n.text
 
     def redirect_to_near_tab(self):
-        tab = self.wait_visibility_until_and_get_elem_by_css(self.NEAR_TAB)
+        tab = self.wait_clickable_until_and_get_elem_by_css(self.NEAR_TAB)
         tab.click()
 
     def get_notification_title(self):

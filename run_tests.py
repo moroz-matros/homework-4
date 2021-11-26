@@ -23,9 +23,9 @@ from cases.subscription_cases import SubscriptionTest
 if __name__ == '__main__':
     suite = unittest.TestSuite(
         (
-             unittest.makeSuite(LoginTest),  #ok++
-             unittest.makeSuite(RegistrationTest),  #ok++
-             unittest.makeSuite(EventsTest),  #ok++
+             #unittest.makeSuite(LoginTest),  #ok++
+             #unittest.makeSuite(RegistrationTest),  #ok++
+             #unittest.makeSuite(EventsTest),  #ok++
              unittest.makeSuite(EventTest),  #ok++
             # unittest.makeSuite(SubscriptionTest),  #ok++
             # unittest.makeSuite(NavbarTest),  #ok++
@@ -37,7 +37,7 @@ if __name__ == '__main__':
             # unittest.makeSuite(ProfileTest),  #--1
             # unittest.makeSuite(ProfileChangeTest),  #+++
             #unittest.makeSuite(ProfilePasswordChangeTest),  # ++
-             unittest.makeSuite(ProfileEventCardTest) #ok+-
+             #unittest.makeSuite(ProfileEventCardTest) #ok+-
     )
     )
 

@@ -23,7 +23,7 @@ class LoginPage(Page):
         password_input.send_keys(password)
 
     def click_login_button(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.LOGIN_BUTTON)
+        button = self.wait_clickable_until_and_get_elem_by_css(self.LOGIN_BUTTON)
         button.click()
 
     def get_form_title(self):
@@ -39,5 +39,5 @@ class LoginPage(Page):
         return error.text
 
     def click_redirect(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.REDIRECT)
+        button = self.wait_clickable_until_and_get_elem_by_css(self.REDIRECT)
         button.click()
