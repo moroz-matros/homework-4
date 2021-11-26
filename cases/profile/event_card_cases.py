@@ -43,9 +43,8 @@ class ProfileEventCardTest(Test):
 
         while not self.page.is_exists_event_top():
             self.page.click_arrow_down()
+
         self.page.click_share_button()
-        while not self.page.is_exists_share_window():
-            continue
         is_vk = self.page.get_vk_button().is_displayed()
         is_copy = self.page.get_copy_button().is_displayed()
 

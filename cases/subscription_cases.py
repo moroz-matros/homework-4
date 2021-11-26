@@ -5,6 +5,7 @@ from pages.subscription_page import SubscriptionPage
 
 SUBSCRIBERS = 'Подписчики'
 SUBSCRIBED_TO = 'Подписки'
+UNSUBSCRIBE = 'Отписаться'
 NO_ONE = 'Никого не найдено =('
 NO_ONE_2 = 'Тут пока пусто =('
 
@@ -16,6 +17,12 @@ class SubscriptionTest(Test):
         self.page = SubscriptionPage(self.driver)
         self.other_profile_page = OtherProfilePage(self.driver)
         self.profile_page = ProfilePage(self.driver)
+
+        # отписка, если подписан
+        self.other_profile_page.open_other_profile(self.ID2)
+        text = self.other_profile_page.get_subscribe_button_text()
+        if text == UNSUBSCRIBE:
+            self.other_profile_page.click_subscribe()
 
     def test_subscriptions_no_subscribers(self):
         # При отсутствии подписчиков выдает соответствующее сообщение.
@@ -40,6 +47,7 @@ class SubscriptionTest(Test):
         self.login2()
         self.profile_page.open()
         self.profile_page.redirect_to_subscribers()
+        self.page.wait_for_page(self.page.CONTAINER)
         name = self.page.get_sub_name()
         self.logout()
 
@@ -51,13 +59,13 @@ class SubscriptionTest(Test):
         self.login2()
         self.profile_page.open()
         self.profile_page.redirect_to_subscribers()
+        self.page.wait_for_page(self.page.CONTAINER)
         text = self.page.get_no_one_text()
 
         flag = (text == NO_ONE) or (text == NO_ONE_2)
 
         self.assertEqual(self.NAME, name)
         self.assertTrue(flag)
-    
 
     def test_subscriptions_add_remove_subscribed_to(self):
         # Наличие карточки с пользователем после появления подписки. Ее отсутствие после отписки.
@@ -67,6 +75,7 @@ class SubscriptionTest(Test):
 
         self.profile_page.open()
         self.profile_page.redirect_to_subscribed_to()
+        self.page.wait_for_page(self.page.CONTAINER)
         name = self.page.get_sub_name()
 
         self.other_profile_page.open_other_profile(self.ID2)
@@ -75,6 +84,7 @@ class SubscriptionTest(Test):
         self.profile_page.open()
         self.profile_page.redirect_to_subscribed_to()
         text = self.page.get_no_one_text()
+        self.page.wait_for_page(self.page.CONTAINER)
 
         flag = (text == NO_ONE) or (text == NO_ONE_2)
         self.assertEqual(self.NAME2, name)
@@ -93,28 +103,26 @@ class SubscriptionTest(Test):
                          SUBSCRIBED_TO + ', вернулась страница ' + tab)
         self.assertEqual(NO_ONE, text)
 
-
     def test_subscriptions_tabs_refresh(self):
         # Происходит переключение между вкладками.
         # При обновлении страницы выбранная вкладка сохраняется.
 
         self.profile_page.open()
         self.profile_page.redirect_to_subscribers()
-        self.page.wait_for_page(self.page.CONTAINER)
         self.page.redirect_to_subscribed_to()
+        self.page.wait_for_page(self.page.CONTAINER)
         tab_subscribed_to1 = self.page.get_active_tab_title()
         self.page.refresh()
         tab_subscribed_to2 = self.page.get_active_tab_title()
         self.page.redirect_to_subscribers()
+        self.page.wait_for_page(self.page.CONTAINER)
         tab_subscribers1 = self.page.get_active_tab_title()
         self.page.refresh()
         tab_subscribers2 = self.page.get_active_tab_title()
 
         self.assertEqual(SUBSCRIBED_TO, tab_subscribed_to1, 'неправильный редирект по ссылке ' + SUBSCRIBED_TO)
-        self.assertEqual(SUBSCRIBED_TO, tab_subscribed_to2, 'вкладка ' + SUBSCRIBED_TO + ' сбрасывается при обновлении страницы')
+        self.assertEqual(SUBSCRIBED_TO, tab_subscribed_to2,
+                         'вкладка ' + SUBSCRIBED_TO + ' сбрасывается при обновлении страницы')
         self.assertEqual(SUBSCRIBERS, tab_subscribers1, 'неправильный редирект по ссылке ' + SUBSCRIBERS)
         self.assertEqual(SUBSCRIBERS, tab_subscribers2,
                          'вкладка ' + SUBSCRIBERS + ' сбрасывается при обновлении страницы')
-
-
-

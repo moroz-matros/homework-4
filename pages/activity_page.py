@@ -11,9 +11,10 @@ class ActivityPage(Page):
     EVENT = ':last-of-type.event-title_anchor'
 
     def get_activity_block(self):
-        block = self.wait_presence_until_and_get_elem_by_css(self.ACTIVITY_BLOCK)
-        while not block.is_enabled():
-            continue
+        try:
+            block = self.wait_presence_until_and_get_elem_by_css(self.ACTIVITY_BLOCK)
+        except:
+            block = self.wait_presence_until_and_get_elem_by_css(self.ACTIVITY_BLOCK)
         return block
 
     def click_friend(self):

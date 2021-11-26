@@ -51,7 +51,7 @@ class Page(object):
     def if_exists_css(self, elem):
         try:
             self.driver.find_element(By.CSS_SELECTOR, elem)
-        except NoSuchElementException:
+        except:
             return False
         return True
 

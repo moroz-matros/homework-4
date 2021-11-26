@@ -70,18 +70,18 @@ class ProfilePage(Page):
 
     def redirect_to_subscribers(self):
         try:
-            button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBER)
+            button = self.wait_clickable_until_and_get_elem_by_css(self.SUBSCRIBER)
             button.click()
         except StaleElementReferenceException:
-            button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBER)
+            button = self.wait_clickable_until_and_get_elem_by_css(self.SUBSCRIBER)
             button.click()
 
     def redirect_to_subscribed_to(self):
         try:
-            button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBED_TO)
+            button = self.wait_clickable_until_and_get_elem_by_css(self.SUBSCRIBED_TO)
             button.click()
         except StaleElementReferenceException:
-            button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBED_TO)
+            button = self.wait_clickable_until_and_get_elem_by_css(self.SUBSCRIBED_TO)
             button.click()
 
     def upload_avatar(self, text):
@@ -98,21 +98,23 @@ class ProfilePage(Page):
         return avatar.get_attribute('style')
 
     def get_new_avatar_pic_style(self, old):
+        while not self.if_exists_css(self.AVATAR):
+            continue
         try:
             avatar = self.wait_visibility_until_and_get_elem_by_css(self.AVATAR)
+            style = avatar.get_attribute('style')
         except:
             avatar = self.wait_visibility_until_and_get_elem_by_css(self.AVATAR)
-        while not avatar.is_enabled():
-            continue
-        style = avatar.get_attribute('style')
+            style = avatar.get_attribute('style')
         while style == old:
+            while not self.if_exists_css(self.AVATAR):
+                continue
             try:
                 avatar = self.wait_visibility_until_and_get_elem_by_css(self.AVATAR)
+                style = avatar.get_attribute('style')
             except:
                 avatar = self.wait_visibility_until_and_get_elem_by_css(self.AVATAR)
-            while not avatar.is_enabled():
-                continue
-            style = avatar.get_attribute('style')
+                style = avatar.get_attribute('style')
         return style
 
     def get_submit_avatar_button(self):
@@ -120,16 +122,16 @@ class ProfilePage(Page):
         return button
 
     def get_avatar_error(self):
-        text = self.wait_presence_until_and_get_elem_by_css(self.AVATAR_ERROR)
-        while not text.is_enabled():
+        while not self.if_exists_css(self.AVATAR_ERROR):
             continue
+        # TODO поставить на соответствие текста
+        text = self.wait_visibility_until_and_get_elem_by_css(self.AVATAR_ERROR)
         return text.text
 
     def click_arrow_down(self):
-        try:
-            button = self.wait_clickable_until_and_get_elem_by_css(self.ARROW_DOWN)
-        except:
-            button = self.wait_clickable_until_and_get_elem_by_css(self.ARROW_DOWN)
+        while not self.if_exists_css(self.ARROW_DOWN):
+            continue
+        button = self.wait_clickable_until_and_get_elem_by_css(self.ARROW_DOWN)
         button.click()
 
     def click_arrow_up(self):
@@ -153,6 +155,8 @@ class ProfilePage(Page):
         return text.text
 
     def click_share_button(self):
+        while not self.if_exists_css(self.SHARE_BUTTON):
+            continue
         try:
             button = self.wait_clickable_until_and_get_elem_by_css(self.SHARE_BUTTON)
             button.click()
@@ -161,6 +165,8 @@ class ProfilePage(Page):
             button.click()
 
     def get_vk_button(self):
+        while not self.if_exists_css(self.VK_BUTTON):
+            continue
         try:
             button = self.wait_visibility_until_and_get_elem_by_css(self.VK_BUTTON)
             return button
@@ -169,11 +175,13 @@ class ProfilePage(Page):
             return button
 
     def get_copy_button(self):
+        while not self.if_exists_css(self.COPY_BUTTON):
+            continue
         try:
-            button = self.wait_visibility_until_and_get_elem_by_css(self.COPY_BUTTON)
+            button = self.wait_visibility_until_and_get_elem_by_css(self.VK_BUTTON)
             return button
         except:
-            button = self.wait_visibility_until_and_get_elem_by_css(self.COPY_BUTTON)
+            button = self.wait_visibility_until_and_get_elem_by_css(self.VK_BUTTON)
             return button
 
     def fill_name(self, text):

@@ -27,10 +27,12 @@ class NavbarPage(Page):
         return name_text.text
 
     def click_logo(self):
-        logo = self.wait_clickable_until_and_get_elem_by_css(self.LOGO)
-        while not logo.is_enabled():
-            continue
-        logo.click()
+        try:
+            logo = self.wait_clickable_until_and_get_elem_by_css(self.LOGO)
+            logo.click()
+        except:
+            logo = self.wait_clickable_until_and_get_elem_by_css(self.LOGO)
+            logo.click()
 
     def click_bell(self):
         bell = self.wait_visibility_until_and_get_elem_by_css(self.BELL)
