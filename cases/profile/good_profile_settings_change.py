@@ -25,12 +25,9 @@ class ProfilePasswordChangeTest(Test):
         # Сохраняет при вводе корректных старого и нового паролей (новый пароль >=6 символов).
 
         self.new_password = ''.join(random.choice(letters) for i in range(10))
-        print(self.new_password)
 
         self.page.redirect_to_settings()
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
-
-        # тут не успевает подгрузиться
 
         self.page.fill_old_password(self.PASSWORD)
         self.page.fill_new_password(self.new_password)

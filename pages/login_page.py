@@ -3,7 +3,7 @@ from pages.base_page import Page
 
 class LoginPage(Page):
     BASE_URL = 'https://qdaqda.ru/login'
-    PATH = ''
+    CONTAINER = '#formBody'
 
     FORM_TITLE = '.form__title'
 
@@ -16,28 +16,28 @@ class LoginPage(Page):
     PASSWORD_ERROR = '#passwordError'
 
     def fill_form(self, login, password):
-        login_input = self.wait_until_and_get_elem_by_css(self.LOGIN_INPUT)
-        password_input = self.wait_until_and_get_elem_by_css(self.PASSWORD_INPUT)
+        login_input = self.wait_visibility_until_and_get_elem_by_css(self.LOGIN_INPUT)
+        password_input = self.wait_visibility_until_and_get_elem_by_css(self.PASSWORD_INPUT)
 
         login_input.send_keys(login)
         password_input.send_keys(password)
 
     def click_login_button(self):
-        button = self.wait_until_and_get_elem_by_css(self.LOGIN_BUTTON)
+        button = self.wait_visibility_until_and_get_elem_by_css(self.LOGIN_BUTTON)
         button.click()
 
     def get_form_title(self):
-        title = self.wait_until_and_get_elem_by_css(self.FORM_TITLE)
+        title = self.wait_visibility_until_and_get_elem_by_css(self.FORM_TITLE)
         return title.text
 
     def get_login_error(self):
-        error = self.wait_until_and_get_elem_by_css(self.LOGIN_ERROR)
+        error = self.wait_visibility_until_and_get_elem_by_css(self.LOGIN_ERROR)
         return error.text
 
     def get_password_error(self):
-        error = self.wait_until_and_get_elem_by_css(self.PASSWORD_ERROR)
+        error = self.wait_visibility_until_and_get_elem_by_css(self.PASSWORD_ERROR)
         return error.text
 
     def click_redirect(self):
-        button = self.wait_until_and_get_elem_by_css(self.REDIRECT)
+        button = self.wait_visibility_until_and_get_elem_by_css(self.REDIRECT)
         button.click()

@@ -11,7 +11,7 @@ class OtherProfilePage(Page):
     WRITE_BUTTON = '#messageButton'
 
     def get_user_name(self):
-        name = self.wait_until_and_get_elem_by_css(self.USER_NAME)
+        name = self.wait_visibility_until_and_get_elem_by_css(self.USER_NAME)
         return name.text
 
     def open_other_profile(self, n):
@@ -19,14 +19,14 @@ class OtherProfilePage(Page):
 
     def click_subscribe(self):
         try:
-            button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
+            button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
             button.click()
         except:
-            button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
+            button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
             button.click()
 
     def get_subscribe_button_text(self):
-        button = self.wait_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
+        button = self.wait_visibility_until_and_get_elem_by_css(self.SUBSCRIBE_BUTTON)
         return button.text
 
     def get_subscribe_button(self):
@@ -34,7 +34,7 @@ class OtherProfilePage(Page):
         return button
 
     def click_write_message(self):
-        button = self.wait_until_and_get_elem_by_css(self.WRITE_BUTTON)
+        button = self.wait_visibility_until_and_get_elem_by_css(self.WRITE_BUTTON)
         button.click()
 
     def get_write_message_button(self):
