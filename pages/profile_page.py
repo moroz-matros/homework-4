@@ -185,7 +185,6 @@ class ProfilePage(Page):
             field.clear()
             field.send_keys(text)
 
-
     def fill_about(self, text):
         try:
             field = self.wait_presence_until_and_get_elem_by_name(self.ABOUT)
@@ -195,7 +194,6 @@ class ProfilePage(Page):
             field = self.wait_presence_until_and_get_elem_by_name(self.ABOUT)
             field.clear()
             field.send_keys(text)
-
 
     def fill_city(self, text):
         try:
@@ -207,7 +205,6 @@ class ProfilePage(Page):
             field.clear()
             field.send_keys(text)
 
-
     def fill_birthday(self, text):
         try:
             field = self.wait_presence_until_and_get_elem_by_name(self.DATE)
@@ -217,7 +214,6 @@ class ProfilePage(Page):
             field = self.wait_presence_until_and_get_elem_by_name(self.DATE)
             field.clear()
             field.send_keys(text)
-
 
     def fill_email(self, text):
         try:
@@ -229,11 +225,13 @@ class ProfilePage(Page):
             field.clear()
             field.send_keys(text)
 
-
     def click_save_changes(self):
-        button = self.wait_visibility_until_and_get_elem_by_css(self.SAVE_BUTTON)
-        button.click()
-
+        try:
+            button = self.wait_visibility_until_and_get_elem_by_css(self.SAVE_BUTTON)
+            button.click()
+        except:
+            button = self.wait_visibility_until_and_get_elem_by_css(self.SAVE_BUTTON)
+            button.click()
 
     def redirect_to_about(self):
         try:
@@ -244,28 +242,44 @@ class ProfilePage(Page):
             tab.click()
 
     def get_name(self):
-        field = self.wait_until_and_get_elem_by_name(self.NAME)
-        return field.get_attribute('value')
+        try:
+            field = self.wait_until_and_get_elem_by_name(self.NAME)
+            return field.get_attribute('value')
+        except:
+            field = self.wait_until_and_get_elem_by_name(self.NAME)
+            return field.get_attribute('value')
 
     def get_about(self):
-        field = self.wait_until_and_get_elem_by_name(self.ABOUT)
-        return field.get_attribute('value')
-
+        try:
+            field = self.wait_until_and_get_elem_by_name(self.ABOUT)
+            return field.get_attribute('value')
+        except:
+            field = self.wait_until_and_get_elem_by_name(self.ABOUT)
+            return field.get_attribute('value')
 
     def get_city(self):
-        field = self.wait_until_and_get_elem_by_name(self.CITY)
-        return field.get_attribute('value')
-
+        try:
+            field = self.wait_until_and_get_elem_by_name(self.CITY)
+            return field.get_attribute('value')
+        except:
+            field = self.wait_until_and_get_elem_by_name(self.CITY)
+            return field.get_attribute('value')
 
     def get_birthday(self):
-        field = self.wait_until_and_get_elem_by_name(self.DATE)
-        return field.get_attribute('value')
-
+        try:
+            field = self.wait_until_and_get_elem_by_name(self.DATE)
+            return field.get_attribute('value')
+        except:
+            field = self.wait_until_and_get_elem_by_name(self.DATE)
+            return field.get_attribute('value')
 
     def get_email(self):
-        field = self.wait_until_and_get_elem_by_name(self.EMAIL)
-        return field.get_attribute('value')
-
+        try:
+            field = self.wait_until_and_get_elem_by_name(self.EMAIL)
+            return field.get_attribute('value')
+        except:
+            field = self.wait_until_and_get_elem_by_name(self.EMAIL)
+            return field.get_attribute('value')
 
     def get_name_error_text(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.NAME_ERROR).text
@@ -276,31 +290,25 @@ class ProfilePage(Page):
                 text = self.wait_visibility_until_and_get_elem_by_css(self.NAME_ERROR).text
         return text
 
-
     def get_about_error_text(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.ABOUT_ERROR)
         return text.text
-
 
     def get_city_error_text(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.CITY_ERROR)
         return text.text
 
-
     def get_birthday_error_text(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.DATE_ERROR)
         return text.text
-
 
     def get_email_error_text(self):
         text = self.wait_presence_until_and_get_elem_by_css(self.EMAIL_ERROR)
         return text.text
 
-
     def redirect_to_settings(self):
         settings = self.wait_presence_until_and_get_elem_by_css(self.SETTINGS_TAB)
         settings.click()
-
 
     def fill_old_password(self, text):
         try:
@@ -312,7 +320,6 @@ class ProfilePage(Page):
             field.clear()
             field.send_keys(text)
 
-
     def fill_new_password(self, text):
         try:
             field = self.wait_until_and_get_elem_by_name(self.NEW_PASSWORD)
@@ -323,28 +330,23 @@ class ProfilePage(Page):
             field.clear()
             field.send_keys(text)
 
-
     def click_save_new_password(self):
         button = self.wait_visibility_until_and_get_elem_by_css(self.SAVE_BUTTON)
         button.click()
-
 
     def get_password_success(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.PASSWORD_SUCCESS)
         return text.text
 
-
     def get_password_error(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.PASSWORD_ERROR)
         return text.text
-
 
     def get_profile_name(self):
         text = self.wait_visibility_until_and_get_elem_by_css(self.PROFILE_NAME)
         return text.text
 
-
-    def get_changed_profile_name(self, name):
+    def get_changed_profile_name(self):
         text = self.wait_presence_until_and_get_elem_by_css(self.PROFILE_NAME)
         while not text.is_enabled():
             continue
@@ -353,4 +355,3 @@ class ProfilePage(Page):
     def get_event_cube(self):
         cube = self.wait_presence_until_and_get_elem_by_css(self.EVENT_CUBE)
         return cube
-

@@ -43,8 +43,9 @@ class ProfileChangeTest(Test):
             self.page.fill_birthday(new_date)
             self.page.fill_city(new_city)
             self.page.fill_email(new_email)
+            self.page.click_save_changes()
 
-            if (new_name == self.page.get_name() and
+            if (new_name == self.page.get_changed_profile_name() and
                     new_about == self.page.get_about() and
                     new_date == self.page.get_birthday() and
                     new_city == self.page.get_city() and
@@ -53,7 +54,7 @@ class ProfileChangeTest(Test):
 
         # time.sleep(100)
 
-        self.page.click_save_changes()
+        # self.page.click_save_changes()
 
         self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
         # self.page.redirect_to_about()
@@ -66,7 +67,7 @@ class ProfileChangeTest(Test):
             city = self.page.get_city()
             email = self.page.get_email()
 
-            if (name == self.page.get_name() and
+            if (name == self.page.get_changed_profile_name() and
                     about == self.page.get_about() and
                     date == self.page.get_birthday() and
                     city == self.page.get_city() and
@@ -74,6 +75,10 @@ class ProfileChangeTest(Test):
                 break
 
         print(name)
+        print(about)
+        print(date)
+        print(city)
+        print(email)
         self.assertEqual(new_name, name)
         self.assertEqual(new_about, about)
         self.assertEqual(new_date, date)
