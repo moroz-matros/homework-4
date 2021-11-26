@@ -26,6 +26,7 @@ class ChatTest(Test):
         self.page.write_message("str")
         self.page.click_send_button()
         self.page.refresh()
+        self.page.wait_for_page(self.page.CONTAINER)
         style1 = self.page.get_left_card_color()
         self.logout()
 
@@ -33,6 +34,7 @@ class ChatTest(Test):
         self.other_profile.open_other_profile(self.ID)
         self.other_profile.click_write_message()
         self.page.refresh()
+        self.page.wait_for_page(self.page.CONTAINER)
         style2 = self.page.get_left_card_color()
         self.assertNotEqual(style2, style1)
 

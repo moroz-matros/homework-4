@@ -20,6 +20,7 @@ class ProfileTest(Test):
     def setUp(self):
         super().setUp()
         self.page = ProfilePage(self.driver)
+        self.page.BASE_URL = 'https://qdaqda.ru/profile?tab=aboutTab'
         self.login()
         self.page.open()
 
@@ -61,8 +62,6 @@ class ProfileTest(Test):
         n = random.randint(1, 27)
         new_name = str(n) + ''.join(random.choice(letters) for i in range(10))
 
-        self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
         self.page.fill_name(new_name)
         self.page.click_save_changes()
         error = self.page.get_name_error_text()
@@ -74,8 +73,6 @@ class ProfileTest(Test):
 
         new_name = '.' + ''.join(random.choice(letters) for i in range(10))
 
-        self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
         self.page.fill_name(new_name)
         self.page.click_save_changes()
         error = self.page.get_name_error_text()
@@ -87,8 +84,6 @@ class ProfileTest(Test):
 
         new_name = '@' + ''.join(random.choice(letters) for i in range(10))
 
-        self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
         self.page.fill_name(new_name)
         self.page.click_save_changes()
         error = self.page.get_name_error_text()
@@ -105,8 +100,6 @@ class ProfileTest(Test):
 
         new_name = ''
 
-        self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
         self.page.fill_name(new_name)
         self.page.click_save_changes()
         error = self.page.get_name_error_text()
@@ -124,8 +117,6 @@ class ProfileTest(Test):
         n = random.randint(10, 27)
         new_date = '2000/01/' + str(n)
 
-        self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
         self.page.fill_birthday(new_date)
         self.page.click_save_changes()
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
@@ -143,8 +134,6 @@ class ProfileTest(Test):
 
         new_email = ''.join(random.choice(letters) for i in range(10))
 
-        self.page.redirect_to_about()
-        self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
         self.page.fill_email(new_email)
         self.page.click_save_changes()
         error = self.page.get_email_error_text()

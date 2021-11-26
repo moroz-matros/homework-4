@@ -30,6 +30,7 @@ class ActivityFavouriteTest(Test):
         self.logout()
 
     def tearDown(self):
+        self.page.open()
         self.login2()
         self.events_page.open()
         event = self.events_page.get_first_card_pic()

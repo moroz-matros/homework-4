@@ -81,8 +81,7 @@ class NavbarTest(Test):
         # Логаут у авторизованного пользователя производится корректно (меняется шапка).
 
         self.page.open_menu()
+        self.page.wait_for_page(self.page.CONTAINER_MENU)
         self.page.click_logout()
-
-        #тут иногла не успевает подгружаться
 
         self.assertTrue(self.page.get_registration_logo().is_displayed())
