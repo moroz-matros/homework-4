@@ -31,26 +31,49 @@ class ProfileChangeTest(Test):
         new_city = ''.join(random.choice(letters) for i in range(10))
         new_email = ''.join(random.choice(letters) for i in range(10)) + '@lala.ru'
 
-        self.page.redirect_to_about()
+        # self.page.redirect_to_about()
+        self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
 
-        self.page.fill_name(new_name)
-        self.page.fill_about(new_about)
-        self.page.fill_birthday(new_date)
-        self.page.fill_city(new_city)
-        self.page.fill_email(new_email)
+        # time.sleep(2)
+
+        while True:
+            self.page.fill_name(new_name)
+            self.page.fill_about(new_about)
+            self.page.fill_birthday(new_date)
+            self.page.fill_city(new_city)
+            self.page.fill_email(new_email)
+
+            if (new_name == self.page.get_name() and
+                    new_about == self.page.get_about() and
+                    new_date == self.page.get_birthday() and
+                    new_city == self.page.get_city() and
+                    new_email == self.page.get_email()):
+                break
+
+        # time.sleep(100)
 
         self.page.click_save_changes()
 
-        self.page.open()
-        self.page.redirect_to_about()
+        self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
+        # self.page.redirect_to_about()
 
-        name = self.page.get_changed_profile_name(self.NAME)
-        about = self.page.get_about()
-        date = self.page.get_birthday()
-        city = self.page.get_city()
-        email = self.page.get_email()
+        # time.sleep(2)
+        while True:
+            name = self.page.get_name()
+            about = self.page.get_about()
+            date = self.page.get_birthday()
+            city = self.page.get_city()
+            email = self.page.get_email()
 
+            if (name == self.page.get_name() and
+                    about == self.page.get_about() and
+                    date == self.page.get_birthday() and
+                    city == self.page.get_city() and
+                    email == self.page.get_email()):
+                break
+
+        print(name)
         self.assertEqual(new_name, name)
         self.assertEqual(new_about, about)
         self.assertEqual(new_date, date)

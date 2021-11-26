@@ -31,6 +31,10 @@ class Page(object):
         WebDriverWait(self.driver, 30, 0.1).until(EC.presence_of_element_located((By.NAME, elem)))
         return self.driver.find_element(By.NAME, elem)
 
+    def wait_until_elem_located_to_be_selected(self, elem) -> WebElement:
+        WebDriverWait(self.driver, 30, 0.1, None).until(EC.element_located_to_be_selected((By.NAME, elem)))
+        return self.driver.find_element(By.NAME, elem)
+
     def wait_for_page(self, container_css):
         WebDriverWait(self.driver, 30, 0.1).until(EC.visibility_of_element_located((By.CSS_SELECTOR, container_css)))
         return self.driver.find_element(By.CSS_SELECTOR, container_css)

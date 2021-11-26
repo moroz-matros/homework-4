@@ -23,21 +23,21 @@ from cases.subscription_cases import SubscriptionTest
 if __name__ == '__main__':
     suite = unittest.TestSuite(
         (
-            unittest.makeSuite(LoginTest),  #ok++
-            unittest.makeSuite(RegistrationTest),  #ok++
-            unittest.makeSuite(EventsTest),  #ok++
-            unittest.makeSuite(EventTest),  #ok++
-            unittest.makeSuite(SubscriptionTest),  #ok++
-            unittest.makeSuite(NavbarTest),  #ok++
-            unittest.makeSuite(SearchTest),  #ok++
-            unittest.makeSuite(OtherProfileTest),  #ok++
-            unittest.makeSuite(ChatTest),  #ok++
-            unittest.makeSuite(ActivitySubscriptionTest),  #ok++
-            unittest.makeSuite(ActivityFavouriteTest),  #ok++
-            unittest.makeSuite(ProfileTest),  #--1
+            # unittest.makeSuite(LoginTest),  #ok++
+            # unittest.makeSuite(RegistrationTest),  #ok++
+            # unittest.makeSuite(EventsTest),  #ok++
+            # unittest.makeSuite(EventTest),  #ok++
+            # unittest.makeSuite(SubscriptionTest),  #ok++
+            # unittest.makeSuite(NavbarTest),  #ok++
+            # unittest.makeSuite(SearchTest),  #ok++
+            # unittest.makeSuite(OtherProfileTest),  #ok++
+            # unittest.makeSuite(ChatTest),  #ok++
+            # unittest.makeSuite(ActivitySubscriptionTest),  #ok++
+            # unittest.makeSuite(ActivityFavouriteTest),  #ok++
+            # unittest.makeSuite(ProfileTest),  #--1
             unittest.makeSuite(ProfileChangeTest),  #++
-            unittest.makeSuite(ProfilePasswordChangeTest),  # ++
-            unittest.makeSuite(ProfileEventCardTest) #ok+-
+            # unittest.makeSuite(ProfilePasswordChangeTest),  # ++
+            # unittest.makeSuite(ProfileEventCardTest) #ok+-
     )
     )
 
