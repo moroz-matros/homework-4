@@ -1,5 +1,3 @@
-import time
-
 from cases.base_cases import Test
 from pages.event_page import EventPage
 from pages.events_page import EventsPage
@@ -31,9 +29,8 @@ class ProfileEventCardTest(Test):
     def test_profile_events_card_change(self):
         # При нажатии на стрелку на карточке показывается описание события. При повторном нажатии на стрелку на карточке в описании возвращается исходный вид.
 
-        time.sleep(1)
-        self.page.click_arrow_down()
-        self.page.wait_for_page(self.page.CONTAINER_DESCRIPTION)
+        while not self.page.is_exists_event_top():
+            self.page.click_arrow_down()
         text = self.page.get_event_description()
         self.page.click_arrow_up()
         t = self.page.get_event_title()
@@ -44,9 +41,11 @@ class ProfileEventCardTest(Test):
     def test_profile_events_card_share(self):
         # При нажатии на кнопку шаринга появляется окно со ссылкой, где есть кнопка “скопировать” и “поделиться в вк”.
 
-        time.sleep(1)
-        self.page.click_arrow_down()
+        while not self.page.is_exists_event_top():
+            self.page.click_arrow_down()
         self.page.click_share_button()
+        while not self.page.is_exists_share_window():
+            continue
         is_vk = self.page.get_vk_button().is_displayed()
         is_copy = self.page.get_copy_button().is_displayed()
 

@@ -1,6 +1,6 @@
 import urllib.parse
 
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -47,6 +47,14 @@ class Page(object):
         WebDriverWait(self.driver, self.TIME, 0.1).until(EC.visibility_of_all_elements_located(
             (By.CSS_SELECTOR, container_css)))
         return self.driver.find_element(By.CSS_SELECTOR, container_css)
+
+    def if_exists_css(self, elem):
+        try:
+            self.driver.find_element(By.CSS_SELECTOR, elem)
+        except NoSuchElementException:
+            return False
+        return True
+
 
     def open(self, url=None):
         if (url == None):

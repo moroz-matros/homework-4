@@ -9,7 +9,6 @@ import pyautogui
 
 class ProfilePage(Page):
     BASE_URL = 'https://qdaqda.ru/profile'
-    PATH = ''
 
     TITLE_CLASS = '.smbs-event__title'
     SUBSCRIBER = ':first-of-type.my-profile-header__followers-block'
@@ -31,6 +30,7 @@ class ProfilePage(Page):
     EVENT_CUBE = '.smbs-event-cube'
     ARROW_DOWN = '.smbs-event__arrow-down'
     ARROW_UP = '.smbs-event__arrow-up'
+    TOP_SIDE = '.smbs-event-cube_show_top'
     EVENT_DESCRIPTION = '.smbs-event__text'
     CONTAINER_DESCRIPTION = '.smbs-event_top_side'
     EVENT_TITLE = '.smbs-event__title'
@@ -57,6 +57,8 @@ class ProfilePage(Page):
     NEW_PASSWORD = 'newPassword'
     PASSWORD_ERROR = '#jsPasswordError'
     PASSWORD_SUCCESS = '#jsPasswordSuccess'
+
+    SHARE = '.share-modal'
 
     def get_first_event_title(self):
         title = self.wait_visibility_until_and_get_elem_by_css(self.TITLE_CLASS)
@@ -355,3 +357,9 @@ class ProfilePage(Page):
     def get_event_cube(self):
         cube = self.wait_presence_until_and_get_elem_by_css(self.EVENT_CUBE)
         return cube
+
+    def is_exists_event_top(self):
+        return self.if_exists_css(self.TOP_SIDE)
+
+    def is_exists_share_window(self):
+        return self.if_exists_css(self.SHARE)
