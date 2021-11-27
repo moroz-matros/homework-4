@@ -1,6 +1,5 @@
 import random
 import string
-import time
 
 from cases.base_cases import Test
 from pages.profile_page import ProfilePage

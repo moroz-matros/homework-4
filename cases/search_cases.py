@@ -134,9 +134,3 @@ class SearchTest(Test):
         page.wait_for_page(page.CONTAINER)
 
         self.assertEqual("https://qdaqda.ru/", self.driver.current_url)
-
-
-
-
-
-

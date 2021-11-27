@@ -1,6 +1,5 @@
 import random
 import string
-import time
 
 from cases.base_cases import Test
 from pages.profile_page import ProfilePage
@@ -27,7 +26,6 @@ class ProfilePasswordChangeTest(Test):
 
         self.new_password = ''.join(random.choice(letters) for i in range(10))
 
-        # self.page.redirect_to_settings()
         self.page.open("https://qdaqda.ru/profile?tab=settingsTab")
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
 

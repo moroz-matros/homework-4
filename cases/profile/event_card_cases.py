@@ -59,11 +59,10 @@ class ProfileEventCardTest(Test):
         self.page.click_arrow_down()
         while not self.page.is_exists_event_top and not self.page.is_displayed_event_top():
             self.page.click_arrow_down()
+        self.page.click_arrow_down()
         self.page.wait_for_page(self.page.CONTAINER_DESCRIPTION)
         self.page.click_share_button()
         self.page.wait_for_page(self.page.SHARE)
-
-
 
         is_vk = self.page.get_vk_button().is_displayed()
         is_copy = self.page.get_copy_button().is_displayed()

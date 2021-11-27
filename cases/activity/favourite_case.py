@@ -1,5 +1,3 @@
-import time
-
 from cases.base_cases import Test
 from pages.activity_page import ActivityPage
 from pages.event_page import EventPage

@@ -40,5 +40,3 @@ class OtherProfilePage(Page):
     def get_write_message_button(self):
         button = self.wait_presence_until_and_get_elem_by_css(self.WRITE_BUTTON)
         return button
-
-

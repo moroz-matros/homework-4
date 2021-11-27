@@ -1,10 +1,8 @@
-import os
 import pathlib
 
 from selenium.common.exceptions import StaleElementReferenceException
 
 from pages.base_page import Page
-import pyautogui
 
 
 class ProfilePage(Page):
@@ -123,7 +121,6 @@ class ProfilePage(Page):
 
     def is_exists_avatar_button(self):
         return self.if_exists_css(self.SUBMIT_AVATAR)
-
 
     def get_avatar_error(self):
         while not self.if_exists_css(self.AVATAR_ERROR):
@@ -364,10 +361,13 @@ class ProfilePage(Page):
         return text.text
 
     def get_changed_profile_name(self):
-        text = self.wait_presence_until_and_get_elem_by_css(self.PROFILE_NAME)
-        while not text.is_enabled():
-            continue
-        return text.text
+        try:
+            text = self.wait_presence_until_and_get_elem_by_css(self.PROFILE_NAME)
+            return text.text
+        except:
+            text = self.wait_presence_until_and_get_elem_by_css(self.PROFILE_NAME)
+            return text.text
+
 
     def get_event_cube(self):
         cube = self.wait_presence_until_and_get_elem_by_css(self.EVENT_CUBE)
@@ -383,7 +383,6 @@ class ProfilePage(Page):
         except:
             event_top = self.wait_visibility_until_and_get_elem_by_css(self.TOP_SIDE)
             return event_top.is_displayed()
-
 
     def is_exists_share_window(self):
         return self.if_exists_css(self.SHARE)

@@ -24,7 +24,3 @@ class ActivityPage(Page):
     def click_event(self):
         name = self.wait_visibility_until_and_get_elem_by_css(self.EVENT)
         name.click()
-
-
-
-

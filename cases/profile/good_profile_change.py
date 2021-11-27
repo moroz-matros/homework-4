@@ -29,11 +29,8 @@ class ProfileChangeTest(Test):
         new_city = ''.join(random.choice(letters) for i in range(10))
         new_email = ''.join(random.choice(letters) for i in range(10)) + '@lala.ru'
 
-        # self.page.redirect_to_about()
         self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
-
-        # time.sleep(2)
 
         while True:
             self.page.fill_name(new_name)

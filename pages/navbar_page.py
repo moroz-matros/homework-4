@@ -1,5 +1,3 @@
-from selenium.common.exceptions import StaleElementReferenceException
-
 from pages.base_page import Page
 
 

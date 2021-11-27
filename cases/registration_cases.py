@@ -3,6 +3,7 @@ import random
 
 from cases.base_cases import Test
 from pages.login_page import LoginPage
+from pages.navbar_page import NavbarPage
 from pages.registration_page import RegistrationPage
 
 letters = string.ascii_lowercase
@@ -189,7 +190,6 @@ class RegistrationTest(Test):
         text = login_page.get_form_title()
         self.assertEqual(LOGIN_PAGE_TITLE, text)
 
-    '''
     def test_registration_good(self):
         # Регистрация с корректным логином (при других корректных полях).
         rand_string = ''.join(random.choice(letters) for i in range(10))
@@ -198,6 +198,5 @@ class RegistrationTest(Test):
         self.page.click_registration_button()
 
         navbar = NavbarPage(self.driver)
-        login_text = navbar.get_login()
-        self.assertEqual(rand_string, login_text)
-    '''
+        name_text = navbar.get_name()
+        self.assertEqual(rand_string, name_text)

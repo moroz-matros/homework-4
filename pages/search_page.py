@@ -81,8 +81,3 @@ class SearchPage(Page):
     def redirect_to_main(self):
         button = self.wait_visibility_until_and_get_elem_by_css(self.BACK_BUTTON)
         button.click()
-
-
-
-
-

@@ -53,5 +53,3 @@ class RegistrationPage(Page):
     def get_name_error(self):
         error = self.wait_visibility_until_and_get_elem_by_css(self.NICKNAME_ERROR)
         return error.text
-
-

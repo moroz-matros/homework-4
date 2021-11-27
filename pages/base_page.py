@@ -1,6 +1,3 @@
-import urllib.parse
-
-from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -55,7 +52,6 @@ class Page(object):
             return False
         return True
 
-
     def open(self, url=None):
         if (url == None):
             url = self.BASE_URL
@@ -64,8 +60,3 @@ class Page(object):
 
     def refresh(self):
         self.driver.refresh()
-
-
-
-
-

@@ -39,9 +39,3 @@ class ChatPage(Page):
     def click_link(self, ref):
         link = self.driver.find_element_by_link_text(ref)
         link.click()
-
-
-
-
-
-

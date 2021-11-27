@@ -1,13 +1,7 @@
-import time
-
-from selenium.common.exceptions import StaleElementReferenceException
-
 from cases.base_cases import Test
 from pages.chat_page import ChatPage
 from pages.events_page import EventsPage
 from pages.other_profile_page import OtherProfilePage
-
-polling_time = 3
 
 
 class ChatTest(Test):
@@ -71,19 +65,3 @@ class ChatTest(Test):
     def test_chat_max_message_length(self):
         # Ошибка при отправлении слишком большого текста (>4к символов).
     '''
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

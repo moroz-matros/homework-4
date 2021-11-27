@@ -1,14 +1,23 @@
-# Testing for qdaqda.ru
-#### To run tests
-* in one tab
+# Тестирование qdaqda.ru
+
+ATTENTION <br>
+По всему проекту периодически происходит такая штука, что страница может прогрузиться, а потом внезапно обновиться и сбросить все, что там было.
+Возможно, где-то тут виноваты какие-то непредвиденные прорисовки из-за постоянного поллинга. 
+Также возможно, что некоторые анимации работают не так гладко, как хотелось бы.
+И implicit wait в таких случаях не особо спасает, так как элемент изначально уже присутствует на странице.
+Было попробовано много чего, но в итоге только так
+
+#### Чтобы запустить тесты
+
+* в одной вкладке
 ```
 ./grid.sh
 ```
-* in other tab
+* в другой вкладке
 ```
 ./node.sh
 ```
-* finally
+* наконец
 ```
-LOGIN=<qdaqda_valid_login> PASSWORD=<qdaqda_valid_password> NAME=<qdaqda valid name> python3 ./run_tests.py
+BROWSER=CHROME|FIREFOX LOGIN= PASSWORD= NAME= ID= LOGIN2= PASSWORD2= NAME2= ID2= python3 ./run_tests.py
 ```
