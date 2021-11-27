@@ -121,6 +121,10 @@ class ProfilePage(Page):
         button = self.wait_visibility_until_and_get_elem_by_css(self.SUBMIT_AVATAR)
         return button
 
+    def is_exists_avatar_button(self):
+        return self.if_exists_css(self.SUBMIT_AVATAR)
+
+
     def get_avatar_error(self):
         while not self.if_exists_css(self.AVATAR_ERROR):
             continue
@@ -131,8 +135,12 @@ class ProfilePage(Page):
     def click_arrow_down(self):
         while not self.if_exists_css(self.ARROW_DOWN):
             continue
-        button = self.wait_clickable_until_and_get_elem_by_css(self.ARROW_DOWN)
-        button.click()
+        try:
+            button = self.wait_clickable_until_and_get_elem_by_css(self.ARROW_DOWN)
+            button.click()
+        except:
+            button = self.wait_clickable_until_and_get_elem_by_css(self.ARROW_DOWN)
+            button.click()
 
     def click_arrow_up(self):
         try:
@@ -175,7 +183,7 @@ class ProfilePage(Page):
             return button
 
     def get_copy_button(self):
-        while not self.if_exists_css(self.COPY_BUTTON):
+        while not self.if_exists_css(self.VK_BUTTON):
             continue
         try:
             button = self.wait_visibility_until_and_get_elem_by_css(self.VK_BUTTON)
@@ -189,7 +197,6 @@ class ProfilePage(Page):
             field = self.wait_presence_until_and_get_elem_by_name(self.NAME)
             field.clear()
             field.send_keys(text)
-
         except:
             field = self.wait_presence_until_and_get_elem_by_name(self.NAME)
             field.clear()
@@ -368,6 +375,15 @@ class ProfilePage(Page):
 
     def is_exists_event_top(self):
         return self.if_exists_css(self.TOP_SIDE)
+
+    def is_displayed_event_top(self):
+        try:
+            event_top = self.wait_visibility_until_and_get_elem_by_css(self.TOP_SIDE)
+            return event_top.is_displayed()
+        except:
+            event_top = self.wait_visibility_until_and_get_elem_by_css(self.TOP_SIDE)
+            return event_top.is_displayed()
+
 
     def is_exists_share_window(self):
         return self.if_exists_css(self.SHARE)

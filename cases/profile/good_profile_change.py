@@ -1,7 +1,5 @@
 import random
 import string
-import time
-from selenium.webdriver.support.wait import WebDriverWait
 
 from cases.base_cases import Test
 from pages.profile_page import ProfilePage
@@ -52,14 +50,8 @@ class ProfileChangeTest(Test):
                     new_email == self.page.get_email()):
                 break
 
-        # time.sleep(100)
-
-        # self.page.click_save_changes()
-
         self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
-        # self.page.redirect_to_about()
 
-        # time.sleep(2)
         while True:
             name = self.page.get_name()
             about = self.page.get_about()
@@ -74,11 +66,6 @@ class ProfileChangeTest(Test):
                     email == self.page.get_email()):
                 break
 
-        print(name)
-        print(about)
-        print(date)
-        print(city)
-        print(email)
         self.assertEqual(new_name, name)
         self.assertEqual(new_about, about)
         self.assertEqual(new_date, date)

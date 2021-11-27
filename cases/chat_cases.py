@@ -58,6 +58,8 @@ class ChatTest(Test):
         link = "https://qdaqda.ru/"
         self.page.write_message(link)
         self.page.click_send_button()
+        self.page.refresh()
+        self.page.wait_for_page(self.page.CONTAINER)
         self.page.click_link(link)
 
         main = EventsPage(self.driver)

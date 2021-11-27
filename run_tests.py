@@ -36,7 +36,7 @@ if __name__ == '__main__':
              unittest.makeSuite(ActivityFavouriteTest),  #ok++
              unittest.makeSuite(ProfileTest),  #--1
              unittest.makeSuite(ProfileChangeTest),  #+++
-            unittest.makeSuite(ProfilePasswordChangeTest),  # ++
+             unittest.makeSuite(ProfilePasswordChangeTest),  # ++
              unittest.makeSuite(ProfileEventCardTest) #ok+-
     )
     )

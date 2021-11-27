@@ -26,9 +26,15 @@ class ProfileTest(Test):
 
     def test_profile_change_avatar(self):
         # Загружает картинку, показывает превью.
+        # ATTENTION
+        # В какой-то момент загруженная картинка сбрасывается, поэтому повтор кода
 
         style_before = self.page.get_avatar_pic_style()
         self.page.upload_avatar('/files/1.png')
+        self.page.upload_avatar('/files/1.png')
+        self.page.upload_avatar('/files/1.png')
+        self.page.get_submit_avatar_button()
+
         style_after = self.page.get_new_avatar_pic_style(style_before)
 
         self.assertNotEqual(style_before, style_after)

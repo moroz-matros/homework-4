@@ -30,6 +30,7 @@ class ActivityFavouriteTest(Test):
         self.logout()
 
     def tearDown(self):
+        self.page.open()
         self.login2()
         self.events_page.open()
         event = self.events_page.get_first_card_pic()
@@ -48,6 +49,7 @@ class ActivityFavouriteTest(Test):
 
         self.login()
         self.page.open()
+        self.page.refresh()
         block = self.page.get_activity_block()
         flag = block.is_displayed()
         self.page.click_event()
