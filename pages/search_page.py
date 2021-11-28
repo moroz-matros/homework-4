@@ -1,5 +1,3 @@
-from selenium.common.exceptions import StaleElementReferenceException
-
 from pages.base_page import Page
 
 
@@ -42,7 +40,7 @@ class SearchPage(Page):
         try:
             tab = self.wait_visibility_until_and_get_elem_by_css(tab_name)
             tab.click()
-        except StaleElementReferenceException:
+        except:
             tab = self.wait_visibility_until_and_get_elem_by_css(tab_name)
             tab.click()
 

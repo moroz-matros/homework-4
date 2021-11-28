@@ -18,9 +18,10 @@ class SubscriptionPage(Page):
     def get_no_one_text(self):
         try:
             text = self.wait_visibility_until_and_get_elem_by_css(self.NO_ONE)
+            return text.text
         except:
             text = self.wait_visibility_until_and_get_elem_by_css(self.NO_ONE)
-        return text.text
+            return text.text
 
     def redirect_to_subscribed_to(self):
         tab = self.wait_clickable_until_and_get_elem_by_css(self.SUBSCRIBED_TO)

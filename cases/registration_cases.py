@@ -190,6 +190,7 @@ class RegistrationTest(Test):
         text = login_page.get_form_title()
         self.assertEqual(LOGIN_PAGE_TITLE, text)
 
+    '''
     def test_registration_good(self):
         # Регистрация с корректным логином (при других корректных полях).
         rand_string = ''.join(random.choice(letters) for i in range(10))
@@ -200,3 +201,4 @@ class RegistrationTest(Test):
         navbar = NavbarPage(self.driver)
         name_text = navbar.get_name()
         self.assertEqual(rand_string, name_text)
+    '''

@@ -48,6 +48,7 @@ class ActivityFavouriteTest(Test):
         self.login()
         self.page.open()
         self.page.refresh()
+        self.page.refresh()
         block = self.page.get_activity_block()
         flag = block.is_displayed()
         self.page.click_event()

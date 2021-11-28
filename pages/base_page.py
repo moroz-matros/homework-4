@@ -1,4 +1,7 @@
+import contextlib
+
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.expected_conditions import staleness_of
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -41,6 +44,7 @@ class Page(object):
         return self.driver.find_element(By.NAME, elem)
 
     def wait_for_page(self, container_css):
+        self.wait_for_page_load()
         WebDriverWait(self.driver, self.TIME, 0.1).until(EC.visibility_of_all_elements_located(
             (By.CSS_SELECTOR, container_css)))
         return self.driver.find_element(By.CSS_SELECTOR, container_css)
@@ -51,6 +55,12 @@ class Page(object):
         except:
             return False
         return True
+
+    @contextlib.contextmanager
+    def wait_for_page_load(self, timeout=10):
+        old_page = self.driver.find_element_by_tag_name('html')
+        yield
+        WebDriverWait(self, timeout).until(staleness_of(old_page))
 
     def open(self, url=None):
         if (url == None):

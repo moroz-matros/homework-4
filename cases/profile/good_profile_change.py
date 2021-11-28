@@ -11,6 +11,7 @@ class ProfileChangeTest(Test):
     def setUp(self):
         super().setUp()
         self.page = ProfilePage(self.driver)
+        self.page.BASE_URL = 'https://qdaqda.ru/profile?tab=aboutTab'
         self.login()
         self.page.open()
 
@@ -29,25 +30,17 @@ class ProfileChangeTest(Test):
         new_city = ''.join(random.choice(letters) for i in range(10))
         new_email = ''.join(random.choice(letters) for i in range(10)) + '@lala.ru'
 
-        self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
+        self.page.open()
         self.page.wait_for_page(self.page.CONTAINER_BOTTOM)
 
-        while True:
-            self.page.fill_name(new_name)
-            self.page.fill_about(new_about)
-            self.page.fill_birthday(new_date)
-            self.page.fill_city(new_city)
-            self.page.fill_email(new_email)
-            self.page.click_save_changes()
+        self.page.fill_name(new_name)
+        self.page.fill_about(new_about)
+        self.page.fill_birthday(new_date)
+        self.page.fill_city(new_city)
+        self.page.fill_email(new_email)
+        self.page.click_save_changes()
 
-            if (new_name == self.page.get_changed_profile_name() and
-                    new_about == self.page.get_about() and
-                    new_date == self.page.get_birthday() and
-                    new_city == self.page.get_city() and
-                    new_email == self.page.get_email()):
-                break
-
-        self.page.open("https://qdaqda.ru/profile?tab=aboutTab")
+        self.page.open()
 
         while True:
             name = self.page.get_name()

@@ -1,3 +1,5 @@
+import time
+
 from cases.base_cases import Test
 from pages.event_page import EventPage
 from pages.events_page import EventsPage
@@ -7,7 +9,8 @@ from pages.profile_page import ProfilePage
 class ProfileEventCardTest(Test):
     # ATTENTION
     # По непонятной нам причине после загрузки страницы она обновляется, сбрасывая полученное
-    # состояние карточки. Именно поэтому ниже дублирование кода
+    # состояние карточки. Именно поэтому ниже дублирование кода. Попытки использовать
+    # explicit wait на другие элементы страницы, что она прогрузилась, не помогли
 
     def setUp(self):
         super().setUp()
@@ -33,14 +36,10 @@ class ProfileEventCardTest(Test):
     def test_profile_events_card_change(self):
         # При нажатии на стрелку на карточке показывается описание события. При повторном нажатии на стрелку на карточке в описании возвращается исходный вид.
 
-        self.page.click_arrow_down()
-        while not self.page.is_exists_event_top and not self.page.is_displayed_event_top():
-            self.page.click_arrow_down()
-        self.page.wait_for_page(self.page.CONTAINER_DESCRIPTION)
 
+        time.sleep(1)
         self.page.click_arrow_down()
-        while not self.page.is_exists_event_top and not self.page.is_displayed_event_top():
-            self.page.click_arrow_down()
+
         self.page.wait_for_page(self.page.CONTAINER_DESCRIPTION)
         text = self.page.get_event_description()
         self.page.click_arrow_up()
@@ -52,14 +51,9 @@ class ProfileEventCardTest(Test):
     def test_profile_events_card_share(self):
         # При нажатии на кнопку шаринга появляется окно со ссылкой, где есть кнопка “скопировать” и “поделиться в вк”.
 
+        time.sleep(1)
         self.page.click_arrow_down()
-        while not self.page.is_exists_event_top and not self.page.is_displayed_event_top():
-            self.page.click_arrow_down()
 
-        self.page.click_arrow_down()
-        while not self.page.is_exists_event_top and not self.page.is_displayed_event_top():
-            self.page.click_arrow_down()
-        self.page.click_arrow_down()
         self.page.wait_for_page(self.page.CONTAINER_DESCRIPTION)
         self.page.click_share_button()
         self.page.wait_for_page(self.page.SHARE)

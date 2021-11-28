@@ -51,6 +51,7 @@ class Test(unittest.TestCase):
     def login2(self):
         login_page = LoginPage(self.driver)
         login_page.open()
+        login_page.open()
         login_page.fill_form(self.LOGIN2, self.PASSWORD2)
         login_page.click_login_button()
         navbar = NavbarPage(self.driver)

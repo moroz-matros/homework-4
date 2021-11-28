@@ -125,7 +125,6 @@ class ProfilePage(Page):
     def get_avatar_error(self):
         while not self.if_exists_css(self.AVATAR_ERROR):
             continue
-        # TODO поставить на соответствие текста
         text = self.wait_visibility_until_and_get_elem_by_css(self.AVATAR_ERROR)
         return text.text
 

@@ -83,6 +83,7 @@ class NavbarTest(Test):
         self.page.open_menu()
         self.page.wait_for_page(self.page.CONTAINER_MENU)
         self.page.click_logout()
+        self.page.wait_for_page(self.page.CONTAINER)
         self.page.get_registration_logo()
 
         self.assertTrue(self.page.get_registration_logo().is_displayed())
